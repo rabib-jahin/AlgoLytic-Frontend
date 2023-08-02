@@ -1,0 +1,15 @@
+.submit-code{
+    width: 100%;
+    height: 48%;
+    margin-right: 0;
+    background: #282828;
+    border-radius: 9px;
+    transform: rotate(0.02deg);
+    margin-bottom: 2%;
+}
+.text{
+    width: 100%;
+    height: 82%;
+    background: #282828;
+    color:white;
+}

@@ -1,0 +1,37 @@
+.headerProb {
+  display: flex;
+  height: 618px;
+  padding: 25px;
+  background-color: #141414;
+}
+
+.left {
+  display: flex;
+}
+
+.heading {
+  color: white;
+  margin-left: 75px;
+  cursor: pointer;
+}
+
+.heading:hover {
+  color: gray;
+  margin-left: 75px;
+  cursor: pointer;
+}
+
+.submitCode {
+  height: 50%;
+  width: 300px;
+  background-color: white;
+  margin-right: -10%;
+}
+
+.io {
+  height: 100px;
+  width: 103px;
+  background-color: white;
+  margin-right: -10%;
+  margin-top: 50px;
+}

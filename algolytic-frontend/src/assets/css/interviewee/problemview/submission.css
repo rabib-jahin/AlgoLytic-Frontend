@@ -1,0 +1,24 @@
+.submission{
+
+    color:white;
+}
+.err{
+    color:red;
+    margin-left: 47px;
+    margin-top: 31px;
+}
+.lang{
+
+    color: rgb(192, 192, 247);
+    margin: 48px;
+    margin-left: 56%;
+    margin-top: 3%;
+  
+}
+.accepted{
+    color:green;
+    margin-left: 47px;
+    margin-top: 20px;
+    
+
+}
