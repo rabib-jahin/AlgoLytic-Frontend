@@ -1,0 +1,31 @@
+.in-out{
+    width: 100%;
+    height: 48%;
+    margin-right: 0;
+    background: #282828;
+    border-radius: 9px;
+    transform: rotate(0.02deg);
+}
+.input{
+
+   margin-left: 30px; 
+   margin-top: 30px;
+}
+.output{
+
+    margin-left: 30px; 
+    margin-top: 30px;
+ }
+.in{
+    color: white;
+}
+.out{
+    color: white;
+}
+.green{
+    color: green;
+}
+
+.red{
+    color: red;
+}

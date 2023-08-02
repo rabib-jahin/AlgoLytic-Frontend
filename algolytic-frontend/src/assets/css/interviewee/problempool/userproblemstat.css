@@ -1,0 +1,117 @@
+.box {
+    width: 460px;
+    height: 194px;
+    background-color: #454545;
+    position: relative;
+    border-radius: 20px;
+    margin: auto;
+ 
+    top: 0; bottom: 0; left: 0; right: 0;
+    transform: translate(0, 0);
+    margin-top: 80px;
+  }
+  
+  .ring {
+    position: absolute;
+    top: 5;
+    left: 5;
+    width: 36%;
+    height: 80%;
+    border: 13px solid rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    box-sizing: border-box;
+    margin-left: 40px;
+    margin-top: 19px;
+  }
+  .text-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+ 
+
+
+
+  }
+  
+  .text-green {
+    color: #26FF13;
+    font-style: normal;
+   font-weight: 300;
+   font-family: 'Roboto',sans-serif;
+   line-height: 23px;
+
+    font-size: 22px;
+    margin: 21px 0;
+    display: block;
+  }
+  
+  .text-yellow {
+    color: #FBF206;
+    font-style: normal;
+   font-weight: 300;
+   font-family: 'Roboto',sans-serif;
+   line-height: 23px;
+
+    font-size: 21px;
+    margin: 5px 0;
+    display: block;
+    margin-top: -46px;
+  }
+  .text-red {
+    color: #EE1111;
+    font-style: normal;
+   font-weight: 300;
+   font-family: 'Roboto',sans-serif;
+   line-height: 23px;
+
+    font-size: 21px;
+    margin: 5px 0;
+    display: block;
+    margin-top: -29px;
+  }
+  .fraction {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .numerator {
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto',sans-serif;
+font-style: normal;
+font-weight: 300;
+font-size: 22px;
+line-height: 27px;
+
+color: #FFFFFF;
+  }
+  
+  .division-line {
+    width: 100%;
+    margin: 5px 0;
+    border: none;
+    border-top: 2px solid white;
+  }
+  
+  .denominator {
+    display: flex;
+    align-items: center;
+    font-family: 'Roboto', sans-serif;
+font-style: normal;
+font-weight: 300;
+font-size: 22px;
+line-height: 27px;
+
+color: #FFFFFF;
+  }

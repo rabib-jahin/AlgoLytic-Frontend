@@ -1,0 +1,38 @@
+.contribution-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 60%;
+    height: 60%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    background: #0D1117;
+}
+
+.week{
+    display: flex;
+    flex-direction: column;
+    padding: 8px 2px;
+}
+
+.days{
+    width: 12px;
+    height: 10px;
+    border-radius: 1px;
+    background-color: #161B22;
+    margin-top: 1px;
+}
+
+.day1{
+    margin-top: 10px;
+}
