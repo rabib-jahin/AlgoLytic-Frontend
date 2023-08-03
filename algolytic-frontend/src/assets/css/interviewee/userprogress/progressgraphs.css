@@ -1,0 +1,44 @@
+.progress-container{
+    display: flex;
+    justify-content: space-between;
+    padding: 1% 7%;
+}
+
+.solve-count{
+    background: #000000;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    height: 40%;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+    margin-top: 2%;
+    padding: 2%;
+}
+
+.doughnut{
+    width: 40%;
+    height: 20%;
+}
+
+.accept-rate{
+    background: #000000;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 40%;
+    height: 40%;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+    margin-top: 2%;
+    padding: 2%;
+}

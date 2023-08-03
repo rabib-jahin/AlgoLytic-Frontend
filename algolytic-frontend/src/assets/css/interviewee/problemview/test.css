@@ -1,0 +1,44 @@
+.headerProb{
+    display: flex;
+    justify-content: space-between;
+    height: 667px;
+    background-color: #141414;
+    overflow: hidden;
+}
+
+.left{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: 97.3%;
+    border-radius: 9px;
+    transform: rotate(0.02deg);
+    margin-top: 0.7%;
+    background: #282828;
+}
+
+.tabs {
+    display: flex;
+    width: 100%;
+}
+
+.heading {
+    height: 1px;
+    color: white;
+    margin-left: 75px;
+    cursor: pointer;
+}
+
+.heading:hover {
+    color: gray;
+    margin-left: 75px;
+    cursor: pointer;
+}
+
+.right{
+    display: flex;
+    flex-direction: column;
+    width: 45%;
+    height: 100%;
+    padding: 10px;
+}

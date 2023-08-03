@@ -1,0 +1,153 @@
+.rounded-button {
+    border-radius: 12px;
+  
+    height: 48px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background: #4A4848;
+    opacity: 0.9;
+    margin-left: 13%;
+    margin-top: 46px;
+    border: 1px solid #453C3C;
+    padding-top: 14px;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    width: auto;
+    height: 50px;
+    font-size: 20px;
+}
+.rounded-button-other {
+    border-radius: 12px;
+    width: 120px;
+    height: 48px;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    background: #4A4848;
+    opacity: 0.9;
+    margin-left: 5%;
+    margin-top: 46px;
+    border: 1px solid #453C3C;
+    padding-top: 14px;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+}
+.filtering-container {
+    position: relative;
+}
+
+.dropdown-content {
+    position: absolute;
+ top:456px;
+
+ 
+    width: 184px;
+    height: 149px;
+    background: #4A4848;
+    border: 1px solid #453C3C;
+    border-radius: 13px;
+    overflow-y: auto;
+    z-index: 1;
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+}
+
+.dropdown-item {
+    padding: 5px 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdown-item:hover {
+    background-color:#453C3C;
+}
+
+
+
+.middle{
+    display:flex;
+    padding-left:10%;
+}
+.text-green2 {
+    color: white;
+    font-style: normal;
+   
+    font-family: 'Roboto', sans-serif;
+    margin-top: 8px;
+     font-size: 18px;
+
+
+}
+
+.text-yellow2 {
+    color: #FBF206;
+    font-style: normal;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+
+
+    font-size: 18px;
+
+
+}
+
+.text-red2 {
+    color: #EE1111;
+    font-style: normal;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+
+
+    font-size: 18px;
+
+
+}
+.searchbar-container {
+    position: absolute;
+    width: 283px;
+    height: 45px;
+    margin-left: 65%;
+    margin-top: 46px;
+  
+    background: #4A4848;
+    opacity: 0.9;
+    border: 1px solid #453C3C;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 12px;
+    display: flex;
+  }
+  
+  .searchbar-input {
+    width: 80%;
+    padding: 8px;
+    margin: 0;
+    color: #fff;
+    border: none;
+    outline: none;
+    background: transparent;
+  }
+  
+  .searchbar-button {
+    width: 20%;
+    height: 100%;
+    padding: 8px;
+    background: #fff;
+    color: #4A4848;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 0 12px 12px 0;
+  }
+  
