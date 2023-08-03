@@ -14,7 +14,7 @@ const Description= (props) => {
       }
     useEffect(()=>{
 
- fetchProblems(props.id)
+ //fetchProblems(props.id)
        
       },[])
     return (

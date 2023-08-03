@@ -1,6 +1,10 @@
 import { Button, CircularProgress } from "@mui/material";
 import React, { useState,useEffect } from "react";
 import { submitCode } from "../../../actions/interviewee/submit";
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import "../../../assets/css/interviewee/problemview/submitcode.css";
 import CodeEditorWindow from "./CodeEditorWindow";
@@ -8,6 +12,8 @@ import CodeEditorWindow from "./CodeEditorWindow";
 
 
 import { defineTheme } from "./defineTheme";
+
+
 
 const SubmitCode = (props) => {
     const [text,setText]=useState("")
@@ -24,6 +30,12 @@ int main(){
 
     const [code, setCode] = useState(defaultCode);
     const [theme, setTheme] = useState("cobalt");
+    const [language, setLanguage] = React.useState('');
+
+    const handleChange = (event: SelectChangeEvent) => {
+      setLanguage(event.target.value);
+    };
+  
 
     const onChange = (action, data) => {
         switch (action) {
@@ -78,15 +90,37 @@ submitProblem(code);
             <CodeEditorWindow 
                 code={code}
                 onChange={onChange}
-                language={'cpp'}
+                language={language}
                 theme={theme.value}
             />
             <div>
                 {
                     loading?(
-                        <CircularProgress style={{marginLeft:"50%"}}/>
+                        <CircularProgress style={{marginLeft:"10%"}}/>
                     ):(
-                        <Button style={{marginLeft:"50%"}} color="primary" onClick={submit}>Submit</Button>
+                       
+                      <div style={{display:"flex"}}>
+                      <Button style={{marginLeft:"10%"}} color="primary" onClick={submit}>Submit</Button>
+            
+
+        <FormControl sx={{ m: 1, minWidth: 80 ,color:"white"}} style={{marginLeft:"30%"}}>
+        <InputLabel id="demo-simple-select-autowidth-label" sx={{ color: "white" }}>Language</InputLabel>
+        <Select
+          sx={{ color: "white" }}
+          labelId="demo-simple-select-autowidth-label"
+          id="demo-simple-select-autowidth"
+          value={language}
+          onChange={handleChange}
+          autoWidth
+          label="Language"
+        >
+          <MenuItem value={'c++'}>c++</MenuItem>
+          <MenuItem value={'java'}>java</MenuItem>
+          <MenuItem value={'javascript'}>javascript</MenuItem>
+        </Select>
+      </FormControl>
+
+                  </div>
                     )
                 }
 
