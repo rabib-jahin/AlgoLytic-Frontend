@@ -1,0 +1,23 @@
+name: DevDeploy
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: entering into project folder
+        run: cd algolytic-frontend
+
+      - name: Install dependencies
+        run: npm i
+
+      - name: Build frontend
+        run: npm run build
