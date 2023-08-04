@@ -19,4 +19,4 @@ jobs:
           cd algolytic-frontend
           npm i
           npm run build
-          ls
+          cp -r ./build/* /var/www/html
