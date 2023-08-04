@@ -51,5 +51,6 @@ function App() {
     </>
   );
 }
+
 export default App;
 export { showToast, getApiUrl };

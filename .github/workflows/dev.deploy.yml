@@ -17,9 +17,5 @@ jobs:
       - name: Install dependencies
         run: |
           cd algolytic-frontend
-          npm i
-
-      - name: Build
-        run: |
-          cd algolytic-frontend
+          npm ci
           npm run build
