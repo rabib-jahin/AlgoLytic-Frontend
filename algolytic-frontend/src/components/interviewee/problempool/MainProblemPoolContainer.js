@@ -6,15 +6,15 @@ import { getProbList } from "../../../actions/interviewee/problemList";
 const MainProblemPoolContainer = (props) => {
     const [probs,setProbs]=useState({})
    const [body,setBody]=useState({})
-    const fetchProblems=async (data)=>{
-        var res=await getProbList(data)
+    const fetchProblems=async ()=>{
+        var res=await getProbList()
         console.log(res)
-      //  setProbs(res);
-      setProbs({})
+        setProbs(res);
+   
       }
     return (
         <>
-            <UserProblemStatCard probs={probs} fetchProblems={fetchProblems}/>
+            {/* <UserProblemStatCard probs={probs} fetchProblems={fetchProblems}/> */}
             <Filtering setBody={setBody} body={body} fetchProblems={fetchProblems} setProbs={setProbs} probs={probs}/>
             <ProblemList fetchProblems={fetchProblems} setProbs={setProbs} probs={probs}/>
         </>     

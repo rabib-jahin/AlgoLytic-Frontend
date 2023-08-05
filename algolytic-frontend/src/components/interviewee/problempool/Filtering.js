@@ -36,8 +36,8 @@ const Filtering=(props)=>{
   const [showDropdown, setShowDropdown] = useState(Array(buttons.length).fill(false));
   const fetchTags=async ()=>{
     var res=await getTagList();
-    console.log(res)
-   setTags(res)
+    console.log("data",res.data)
+   setTags(res.data)
   }
   const search=()=>{
 
@@ -100,6 +100,7 @@ props.fetchProblems(d)
     fetchTags()
   },[])
   const toggleDropdown = (index) => {
+    
     setShowDropdown(prevState => {
       const newState = [...prevState];
       newState[index] = !newState[index];
@@ -119,11 +120,20 @@ props.fetchProblems(d)
            {button.name}
             {showDropdown[index] ? <KeyboardArrowUpIcon style={{marginLeft:"15px"}} /> : <KeyboardArrowDownIcon style={{marginLeft:"15px"}} />}
           </button>
-          {showDropdown[index] && (
+          {showDropdown[index] && button.name!=="Tag" && (
             <div className="dropdown-content" style={{marginLeft:index==3?"-2px":index==1?"-8px":null,position: 'absolute', top: '100%'}}>
               {button.items.map((item, itemIndex) => (
                 <div onClick={()=>filter(item,button.name)} key={itemIndex} className="dropdown-item text-green2">
                 {item}
+                </div>
+              ))}
+            </div>
+          )}
+            {showDropdown[index] && button.name=="Tag" && (
+            <div className="dropdown-content" style={{marginLeft:index==3?"-2px":index==1?"-8px":null,position: 'absolute', top: '100%'}}>
+              {button.items.map((item, itemIndex) => (
+                <div onClick={()=>filter(item.name,button.name)} key={itemIndex} className="dropdown-item text-green2">
+                {item.name}
                 </div>
               ))}
             </div>

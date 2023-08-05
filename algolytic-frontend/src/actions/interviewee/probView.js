@@ -11,10 +11,7 @@ export const getProbData=async (id)=>{
       console.log(error);
       
     });
-  return {
-
-    data:"hello"
-  }
+  
     return res.data
 
 

@@ -4,14 +4,15 @@ import { getApiUrl } from '../../App';
 
 export const getTagList=async ()=>{
     let base_url=getApiUrl();
-    console.log(base_url+"/tag/list")
+   
   
     var res=await axios.get(base_url+"/tag/list")
     .catch(error => {
       console.log(error);
       
     });
-  return "hello"
+    console.log(res.data)
+
     return res.data
 
 

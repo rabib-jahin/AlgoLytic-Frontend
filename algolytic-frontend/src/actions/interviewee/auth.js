@@ -1,27 +1,58 @@
 import Cookies from 'universal-cookie';
 import axios from 'axios'
-import { getApiUrl } from '../../App';
+import { getApiUrl,showToast } from '../../App';
 
 const cookies = new Cookies();
 
 const COOKIE_AGE=31536000
+let loader=false;
 
 
 export const checkAuth=()=>{
     return !(cookies.get('token')==undefined || cookies.get('token')==null)
 }
 
-export const googleLogin=async ({credential})=>{
-    try{
-        var result=await axios.post(`${getApiUrl()}/auth/google-login`,{credential})
-        if(result.data.success){
-            cookies.set('token',result.data.token,{ path: '/', maxAge: COOKIE_AGE })
-            return true
+export const checkLoading=()=>{
+    return loader
+}
+
+export const loginUser=async(data)=>{
+    let base_url=getApiUrl();
+    loader=true
+ 
+   var res=await axios.post(base_url+'/auth/login',data).catch(e=>console.log(e))
+        if(res.data.success){
+            cookies.set('token',res.data.access_token,{ path: '/', maxAge: COOKIE_AGE }) //setting token
+          
         }
-        return false
-    }catch(e){
-        return false
-    }
+ return res.data
+}
+
+export const register=(data)=> {
+    let base_url=getApiUrl();
+    console.log("########req data########")
+   
+    axios.post(base_url+'/auth/register',data).then(res=>{  
+     
+        if(!res.data.success){
+           showToast(res.data.message)
+        }else{
+            showToast("Successfully Registered")
+        }
+
+    }).catch(err=>{
+        switch(err.response.status){
+            case 409:
+                showToast('User already exists')
+                break
+            case 500:
+                showToast('Internal server error')
+                break
+            default:
+                showToast('Connectvity problem')
+        }
+    
+    })
 }
 
 export const logout=()=>{
