@@ -11,12 +11,8 @@ export const submitCode=async (data)=>{
       console.log(error);
       
     });
-    return {
-      data:"demo"
-    }
-  
     return res.data
-
+  
 
 
 }

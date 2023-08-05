@@ -12,6 +12,8 @@ import CodeEditorWindow from "./CodeEditorWindow";
 
 
 import { defineTheme } from "./defineTheme";
+import { checkAuth } from "../../../actions/interviewee/auth";
+import { showToast } from "../../../App";
 
 
 
@@ -54,21 +56,27 @@ int main(){
       const setVerdict=props.setVerdict
 
       const submitProblem=async (data)=>{
-        let body={
+        if(checkAuth()){
+          let body={
 
             problem_id:parseInt(props.id),
             user_id:1,
             code:data,
+            lang:language
 
+          }
+          console.log(body)
+          setLoading(true)
+          setVerdict(null)
+        
+          var res=await submitCode(body)
+          console.log(res)
+          setVerdict(res.verdict)
+          setLoading(false)
+        }else{
+          showToast("You need to login to submit")
         }
-        console.log(body)
-        setLoading(true)
-        setVerdict(null)
-       
-        var res=await submitCode(body)
-        console.log(res)
-        setVerdict(res.verdict)
-        setLoading(false)
+        
       }
 
     const submit=()=>{
