@@ -10,7 +10,7 @@ const InputOutput = (props) => {
 const fetchProblem=async (data)=>{
     var res=await getProbData(data)
     
-   setData(res.data)
+   //setData(res.data)
    console.log(res)
   }
 useEffect(()=>{
@@ -26,7 +26,7 @@ fetchProblem(props.id)
   },[props.verdict])
 
     return (
-        <div className="in-out">
+        <div className="in-out" style={{marginTop:"10px"}}>
             <div className="input">
 
                 <h3 className="in">Sample Input</h3>

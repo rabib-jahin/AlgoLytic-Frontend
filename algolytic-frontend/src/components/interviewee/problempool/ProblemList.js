@@ -47,13 +47,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   }));
   
   function createData(
-    Status: string,
-    Title: string,
+    status: string,
+    title: string,
     Acceptance: number,
-    Difficulty: number,
-    Topic: string,
+    difficulty: number,
+    tag: string,
+    is_premium:number
   ) {
-    return { Status, Title, Acceptance, Difficulty, Topic };
+    return { status, title, Acceptance, difficulty, tag,is_premium };
   }
   function TablePaginationActions(props: TablePaginationActionsProps) {
     const theme = useTheme();
@@ -113,17 +114,17 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
   
   const rows = [
-    createData('yes', 'Two Sum', 6.0, 24, 4.0),
-    createData('no', 'Add Two Integers', 9.0, 37, 4.3),
-    createData('yes', 262, 16.0, 24, 6.0),
-    createData('no', 305, 3.7, 67, 4.3),
-    createData('yes', 356, 16.0, 49, 3.9),
-    createData('no', 305, 3.7, 67, 4.3),
-    createData('yes', 356, 16.0, 49, 3.9),
-    createData('no', 305, 3.7, 67, 4.3),
-    createData('yes', 356, 16.0, 49, 3.9),
-    createData('no', 305, 3.7, 67, 4.3),
-    createData('yes', 356, 16.0, 49, 3.9),
+    createData('yes', 'Two Sum', 6.0, 24, 4.0,0),
+    createData('no', 'Add Two Integers', 9.0, 37, 4.3,0),
+    createData('yes', 262, 16.0, 24, 6.0,1),
+    createData('no', 305, 3.7, 67, 4.3,1),
+    createData('yes', 356, 16.0, 49, 3.9,1),
+    createData('no', 305, 3.7, 67, 4.3,1),
+    createData('yes', 356, 16.0, 49, 3.9,1),
+    createData('no', 305, 3.7, 67, 4.3,1),
+    createData('yes', 356, 16.0, 49, 3.9,1),
+    createData('no', 305, 3.7, 67, 4.3,0),
+    createData('yes', 356, 16.0, 49, 3.9,1),
   ];
 const ProblemList = (props) => {
     const [page, setPage] = React.useState(0);
@@ -157,7 +158,7 @@ let data={}
 
 // props.fetchProblems(data)
 // console.log(props.probs)
-
+console.log("rows",rows)
 
   },[])
    
@@ -178,10 +179,12 @@ let data={}
 
           
           {
-            Object.keys(props.probs).length==0?<></>
+            // Object.keys(props.probs).length==0?<></>
+            rows.length==0?<></>
+            // props.probs.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
 :(rowsPerPage > 0
-  ? props.probs.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-  :props.probs
+  ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
+  :rows//props.probs
     
 
 ).map((row) => (
@@ -212,7 +215,8 @@ let data={}
               rowsPerPageOptions={[5, 10, 25]}
               colSpan={3}
               style={{color:"white"}}
-              count={Object.keys(props.probs).length==0?"":props.probs.data.length}
+              // count={Object.keys(props.probs).length==0?"":props.probs.data.length}
+              count={rows.length==0?"":rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{
