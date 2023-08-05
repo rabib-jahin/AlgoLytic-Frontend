@@ -6,14 +6,13 @@ export const getProbList=async (data)=>{
     let base_url=getApiUrl();
     console.log(base_url+"/problem/list")
   
-    var res=await axios.post(base_url+"/problem/list",data)
+    var res=await axios.get(base_url+"/problem/list")
     .catch(error => {
       console.log(error);
       
     });
-    return {
-      data:"problem"
-    }
+
+   
     return res.data
 
 

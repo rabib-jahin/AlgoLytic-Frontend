@@ -156,8 +156,8 @@ window.location.href="/problem/"+id
   useEffect(()=>{
 let data={}
 
-// props.fetchProblems(data)
-// console.log(props.probs)
+ props.fetchProblems()
+ console.log(props.probs)
 console.log("rows",rows)
 
   },[])
@@ -179,31 +179,31 @@ console.log("rows",rows)
 
           
           {
-            // Object.keys(props.probs).length==0?<></>
-            rows.length==0?<></>
-            // props.probs.data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+          Object.keys(props.probs).length==0?<></>
+           
+
 :(rowsPerPage > 0
-  ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
-  :rows//props.probs
+  ?  props.probs.data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) 
+  :props.probs
     
 
-).map((row) => (
-            <StyledTableRow key={row.name} align="left">
+)?.map((row) => (
+            <StyledTableRow key={row.title} align="left">
               <StyledTableCell align="left" component="th" scope="row">
-                {
-                    row.status==1?<DoneIcon color="primary"/>:<RemoveCircleIcon color="danger"/>
-                }
+                
+                    <DoneIcon color="primary"/>
+                
             
               </StyledTableCell>
-              <StyledTableCell  align="left" onClick={()=>redirectProb(row.id)}>{row.title}
+              <StyledTableCell  align="left" onClick={()=>redirectProb(row.problem_id)}>{row.title}
                 {
-                    row.is_premium?<WorkspacePremiumIcon color="primary"/>:null
+                    row.isPremium?<WorkspacePremiumIcon color="primary"/>:null
                 }
               </StyledTableCell>
               
                
                
-              <StyledTableCell align="left">{row.Acceptance}</StyledTableCell>
+              <StyledTableCell align="left">{row.acceptance}</StyledTableCell>
               <StyledTableCell align="left">{row.difficulty}</StyledTableCell>
               <StyledTableCell align="left">{row.tag}</StyledTableCell>
             </StyledTableRow>
@@ -215,8 +215,8 @@ console.log("rows",rows)
               rowsPerPageOptions={[5, 10, 25]}
               colSpan={3}
               style={{color:"white"}}
-              // count={Object.keys(props.probs).length==0?"":props.probs.data.length}
-              count={rows.length==0?"":rows.length}
+              count={Object.keys(props.probs).length==0?"":props.probs.data?.length}
+              // count={rows.length==0?"":rows.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{

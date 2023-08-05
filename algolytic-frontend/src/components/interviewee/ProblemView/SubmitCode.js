@@ -30,7 +30,7 @@ int main(){
 
     const [code, setCode] = useState(defaultCode);
     const [theme, setTheme] = useState("cobalt");
-    const [language, setLanguage] = React.useState('');
+    const [language, setLanguage] = React.useState('cpp');
 
     const handleChange = (event: SelectChangeEvent) => {
       setLanguage(event.target.value);
@@ -114,7 +114,7 @@ submitProblem(code);
           autoWidth
           label="Language"
         >
-          <MenuItem value={'c++'}>c++</MenuItem>
+          <MenuItem value={'cpp'}>c++</MenuItem>
           <MenuItem value={'java'}>java</MenuItem>
           <MenuItem value={'javascript'}>javascript</MenuItem>
         </Select>
