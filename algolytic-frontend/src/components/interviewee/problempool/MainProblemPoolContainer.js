@@ -7,7 +7,8 @@ const MainProblemPoolContainer = (props) => {
     const [probs,setProbs]=useState({})
    const [body,setBody]=useState({})
     const fetchProblems=async ()=>{
-        var res=await getProbList()
+        setProbs({})
+        var res=await getProbList(body)
         console.log(res)
         setProbs(res);
    

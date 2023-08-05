@@ -4,6 +4,7 @@ import { ArrowDownward } from '@mui/icons-material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import SearchIcon from '@mui/icons-material/Search';
+import Button from '@mui/material/Button';
 import { getTagList } from "../../../actions/interviewee/tagList";
 const Filtering=(props)=>{
 
@@ -19,10 +20,7 @@ const Filtering=(props)=>{
       name: 'Difficulty',
       items: ['Easy', 'Medium', 'Hard'],
     },
-    {
-      name: 'Status',
-      items: ['Attempted', 'Solved', 'Not Tried'],
-    },
+   
     {
       name: 'Tag',
       items:tags,
@@ -41,13 +39,15 @@ const Filtering=(props)=>{
   }
   const search=()=>{
 
-let d={}
-d={... props.body,search:text}
-props.setBody(d);
+var res=props.probs?.data?.filter(p=>p.title.startsWith(text))
+props.setProbs({})
 
 
-props.fetchProblems(d)
-
+var obj={
+  success:true,
+  data:res
+}
+props.setProbs(obj)
 
   }
   const filter=(item,name)=>{
@@ -56,10 +56,10 @@ let to=name.toLowerCase()
 
 
 let d={}
-
+if(to!=="premium")
 props.body[to]=item;
 if(to=="difficulty"){
-d={... props.body,difficulty:item}
+d={... props.body,difficulty:item.toLowerCase()}
 props.setBody(d);
 
 
@@ -73,26 +73,30 @@ if(to==="status"){
 if(to==="premium"){
 
   if(item=="Regular") {
-  d={... props.body,is_premium:false}
+  d={... props.body,isPremium:false}
   props.setBody(d);
   
 
 }
   else {
-    d={... props.body,is_premium:true}
+    d={... props.body,isPremium:true}
     props.setBody(d);
 
   }
 }
 if(to=="tag"){
-  d={... props.body,tag:item}
+  d={... props.body,tag:item.toLowerCase()}
   props.setBody(d);
 
 }
 
 console.log(d)
-props.fetchProblems(d)
 
+
+  }
+  const filterfun=()=>{
+    props.fetchProblems()
+props.setBody({})
   }
   useEffect(()=>{
 
@@ -109,7 +113,7 @@ props.fetchProblems(d)
   };
 
   return (
-    <div className="middle">
+    <div className="middle" style={{marginLeft:"10px"}}>
       {buttons.map((button, index) => (
         <div key={index} style={{marginRight: index < buttons.length - 1 ? '50px' : 0, position: 'relative'}}>
           <button
@@ -140,6 +144,9 @@ props.fetchProblems(d)
           )}
         </div>
       ))}
+      <Button style={{marginTop: '8px'}} variant="outlined" className="dropdown-item text-green2" onClick={filterfun} style={{marginLeft:"50px",height:"60px",marginTop:"40px"}}>
+                                               Filter
+                                            </Button>
     <div className="searchbar-container">
     
       <input onChange={(e)=>setText(e.target.value)} type="text" placeholder="Search..." className="searchbar-input" />
