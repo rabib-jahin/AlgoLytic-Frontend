@@ -10,18 +10,18 @@ const Description= (props) => {
         var res=await getProbData(data)
         
        setData(res.data)
-       console.log(res)
+       console.log("nn",res.data)
       }
     useEffect(()=>{
 
- //fetchProblems(props.id)
+ fetchProblems(props.id)
        
       },[])
     return (
         <div className="description" style={{color:"white",marginLeft:"20px"}}>
-  <div style={{display:"flex"}}> <h3>{data.length==0?"":data[0].title}</h3> <h4 style={{color:"green",marginLeft:"20px"}}>{data.length==0?"":data[0].tag}</h4></div>
+  <div style={{display:"flex"}}> <h3>{Object.keys(data).length==0?"":data?.title}</h3> <h4 style={{color:"green",marginLeft:"20px"}}>{Object.keys(data).length==0?"":data?.tag}</h4></div>
 <div>  
-{data.length==0?"":data[0].data_json.statement}
+{Object.keys(data).length==0?"":data?.data_json?.description}
 </div> 
 
         </div>

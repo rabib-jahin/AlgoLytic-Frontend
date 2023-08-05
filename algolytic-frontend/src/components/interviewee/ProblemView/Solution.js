@@ -22,7 +22,7 @@ const Solution = (props) => {
 
 
         {
-            data.length===0?"":data[0].data_json.solution
+            Object.keys(data).length==0?"":data.data_json?.solution
         }
 
          </div>

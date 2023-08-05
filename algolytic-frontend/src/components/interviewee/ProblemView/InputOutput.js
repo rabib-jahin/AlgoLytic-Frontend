@@ -10,7 +10,7 @@ const InputOutput = (props) => {
 const fetchProblem=async (data)=>{
     var res=await getProbData(data)
     
-   //setData(res.data)
+   setData(res.data)
    console.log(res)
   }
 useEffect(()=>{
@@ -30,13 +30,13 @@ fetchProblem(props.id)
             <div className="input">
 
                 <h3 className="in">Sample Input</h3>
-                <h4 className="in">{data.length==0?"":data[0].data_json.input}</h4>
+                <h4 className="in">{Object.keys(data).length==0?"":data.data_json?.input}</h4>
                 
             </div>
             <div className="output">
 
                 <h3 className="out">Sample Output</h3>
-                <h4 className="out">{data.length==0?"":data[0].data_json.output}</h4>
+                <h4 className="out">{Object.keys(data).length==0?"":data.data_json?.output}</h4>
                 {
                     verdict===null?(
                         <></>
