@@ -6,6 +6,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import { getTagList } from "../../../actions/interviewee/tagList";
+
 const Filtering=(props)=>{
 
   // state to keep track of which collapse content is active
@@ -39,7 +40,7 @@ const Filtering=(props)=>{
   }
   const search=()=>{
 
-var res=props.probs?.data?.filter(p=>p.title.startsWith(text))
+var res=props.probs?.data?.filter(p=>p.title.includes(text))
 props.setProbs({})
 
 
@@ -50,10 +51,11 @@ var obj={
 props.setProbs(obj)
 
   }
-  const filter=(item,name)=>{
+  const filter=(item,name,idx)=>{
 
 let to=name.toLowerCase()
-
+var elem=document.getElementById("btn"+idx)
+elem.innerText=item
 
 let d={}
 if(to!=="premium")
@@ -73,13 +75,13 @@ if(to==="status"){
 if(to==="premium"){
 
   if(item=="Regular") {
-  d={... props.body,isPremium:false}
+  d={... props.body,isPremium:0}
   props.setBody(d);
   
 
 }
   else {
-    d={... props.body,isPremium:true}
+    d={... props.body,isPremium:1}
     props.setBody(d);
 
   }
@@ -116,18 +118,22 @@ props.setBody({})
     <div className="middle" style={{marginLeft:"10px"}}>
       {buttons.map((button, index) => (
         <div key={index} style={{marginRight: index < buttons.length - 1 ? '50px' : 0, position: 'relative'}}>
+          <div style={{display:"flex"}}>
           <button
             className="rounded-button"
+            id={"btn"+index}
             style={{marginLeft:index==3?"10px":index==2?"28px":null}}
-            onClick={() => toggleDropdown(index)}
+            
           >
            {button.name}
-            {showDropdown[index] ? <KeyboardArrowUpIcon style={{marginLeft:"15px"}} /> : <KeyboardArrowDownIcon style={{marginLeft:"15px"}} />}
-          </button>
+           
+          </button> 
+          {showDropdown[index] ? <KeyboardArrowUpIcon  onClick={() => toggleDropdown(index)}className="rounded-button" style={{marginLeft:"15px"}} /> : <KeyboardArrowDownIcon onClick={() => toggleDropdown(index)} className="rounded-button" style={{marginLeft:"15px"}} />}
+          </div>
           {showDropdown[index] && button.name!=="Tag" && (
             <div className="dropdown-content" style={{marginLeft:index==3?"-2px":index==1?"-8px":null,position: 'absolute', top: '100%'}}>
               {button.items.map((item, itemIndex) => (
-                <div onClick={()=>filter(item,button.name)} key={itemIndex} className="dropdown-item text-green2">
+                <div onClick={()=>filter(item,button.name,index)} key={itemIndex} className="dropdown-item text-green2">
                 {item}
                 </div>
               ))}
@@ -135,8 +141,8 @@ props.setBody({})
           )}
             {showDropdown[index] && button.name=="Tag" && (
             <div className="dropdown-content" style={{marginLeft:index==3?"-2px":index==1?"-8px":null,position: 'absolute', top: '100%'}}>
-              {button.items.map((item, itemIndex) => (
-                <div onClick={()=>filter(item.name,button.name)} key={itemIndex} className="dropdown-item text-green2">
+              {button.items?.map((item, itemIndex) => (
+                <div onClick={()=>filter(item.name,button.name,index)} key={itemIndex} className="dropdown-item text-green2">
                 {item.name}
                 </div>
               ))}
