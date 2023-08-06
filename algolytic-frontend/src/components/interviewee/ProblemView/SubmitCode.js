@@ -19,23 +19,39 @@ import { showToast } from "../../../App";
 
 const SubmitCode = (props) => {
     const [text,setText]=useState("")
-    
 
-    const defaultCode=`#include<iostream>
+    const defaultCode={
+cpp:`#include<iostream>
 using namespace std;
 
 int main(){
     //your code here;
     
     return 0;
-}`
+}`,
+java:`// Java IDE for Algolytic
+// Use this editor to write, compile and run your Java code online
 
-    const [code, setCode] = useState(defaultCode);
+class Main {
+    public static void main(String[] args) {
+        //System.out.println("Hello, World!");
+    }
+}`,
+javascript:`console.log('Hello World')`,
+python:`print('hello world')`
+}
+
+    const [code, setCode] = useState(defaultCode['cpp']);
     const [theme, setTheme] = useState("cobalt");
     const [language, setLanguage] = React.useState('cpp');
 
+    useEffect(()=>{
+      console.log(code)
+    },[code])
+
     const handleChange = (event: SelectChangeEvent) => {
       setLanguage(event.target.value);
+      setCode(defaultCode[event.target.value])
     };
   
 
@@ -55,6 +71,13 @@ int main(){
       const [loading,setLoading]=useState(false)
       const setVerdict=props.setVerdict
 
+      const compilerToIdeMapping={
+        cpp:'cpp',
+        java:'java',
+        javascript:'nodejs',
+        python:'python3'
+      }
+
       const submitProblem=async (data)=>{
         if(checkAuth()){
           let body={
@@ -62,7 +85,7 @@ int main(){
             problem_id:parseInt(props.id),
             user_id:1,
             code:data,
-            lang:language
+            lang:compilerToIdeMapping[language]
 
           }
           console.log(body)
@@ -70,8 +93,9 @@ int main(){
           setVerdict(null)
         
           var res=await submitCode(body)
-          console.log(res)
           setVerdict(res.verdict)
+          if(!res.verdict)
+            showToast(res.message)
           setLoading(false)
         }else{
           showToast("You need to login to submit")
@@ -97,6 +121,7 @@ submitProblem(code);
             {/* <textarea className="text" onChange={(e)=>setText(e.target.value)}></textarea> */}
             <CodeEditorWindow 
                 code={code}
+                key={language}
                 onChange={onChange}
                 language={language}
                 theme={theme.value}
@@ -125,6 +150,7 @@ submitProblem(code);
           <MenuItem value={'cpp'}>c++</MenuItem>
           <MenuItem value={'java'}>java</MenuItem>
           <MenuItem value={'javascript'}>javascript</MenuItem>
+          <MenuItem value={'python'}>python</MenuItem>
         </Select>
       </FormControl>
 
