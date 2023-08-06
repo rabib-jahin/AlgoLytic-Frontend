@@ -13,11 +13,17 @@ const MainProblemPoolContainer = (props) => {
         setProbs(res);
    
       }
+
+      const setProblems=ps=>{
+        console.log(ps)
+        setProbs(ps)
+      }
+
     return (
         <>
             {/* <UserProblemStatCard probs={probs} fetchProblems={fetchProblems}/> */}
-            <Filtering setBody={setBody} body={body} fetchProblems={fetchProblems} setProbs={setProbs} probs={probs}/>
-            <ProblemList fetchProblems={fetchProblems} setProbs={setProbs} probs={probs}/>
+            <Filtering setBody={setBody} body={body} fetchProblems={fetchProblems} setProbs={setProblems} probs={probs}/>
+            <ProblemList fetchProblems={fetchProblems} setProbs={setProblems} probs={probs}/>
         </>     
     );
 };
