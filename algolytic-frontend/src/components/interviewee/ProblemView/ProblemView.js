@@ -14,6 +14,7 @@ const ProblemView = (props) => {
   const [discussion, setDiscussion] = useState("");
   const [solution, setSolution] = useState("");
   const [submission, setSubmission] = useState("");
+  const [result,setResult]=useState('')
   const [tab, setTab] = useState("description");
   const { id } = useParams()
 
@@ -77,8 +78,8 @@ console.log(id)
         </div>
       </div>
       <div className="right">
-        <SubmitCode setVerdict={setVerdict} id={id} />
-        <InputOutput verdict={verdict} id={id}/>
+        <SubmitCode setVerdict={setVerdict} setResult={setResult} id={id} />
+        <InputOutput verdict={verdict} id={id} result={result}/>
       </div>
     </div>
   );

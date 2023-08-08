@@ -44,9 +44,10 @@ fetchProblem(props.id)
                         verdict?(
                             <h4 className="green">Accepted!!!</h4>
 
-                        ):(
-                            <h4 className="red">Rejected!</h4>
-
+                        ):(<>
+                            <h4 className="red">Wrong Ans!</h4>
+                            <h4 className="red" style={{marginTop:"5px"}}>{props.result}</h4>
+                            </>
                         )
                     )
                 }

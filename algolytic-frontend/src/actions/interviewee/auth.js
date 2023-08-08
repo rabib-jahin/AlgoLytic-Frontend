@@ -21,8 +21,9 @@ export const loginUser=async(data)=>{
     loader=true
  
    var res=await axios.post(base_url+'/auth/login',data).catch(e=>console.log(e))
-        if(res.data.success){
-            cookies.set('token',res.data.access_token,{ path: '/', maxAge: COOKIE_AGE }) //setting token
+   console.log(res.data)  
+   if(res.data.success){
+            cookies.set('token',res.data.token,{ path: '/', maxAge: COOKIE_AGE }) //setting token
           
         }
  return res.data

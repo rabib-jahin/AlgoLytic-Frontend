@@ -83,7 +83,7 @@ python:`print('hello world')`
           let body={
 
             problem_id:parseInt(props.id),
-            user_id:1,
+            
             code:data,
             lang:compilerToIdeMapping[language]
 
@@ -94,8 +94,16 @@ python:`print('hello world')`
         
           var res=await submitCode(body)
           setVerdict(res.verdict)
+          console.log(res.message)
           if(!res.verdict)
-            showToast(res.message)
+            if(res.message.includes("Syntax")|| res.message.includes("Output ")|| res.message.includes("Time Limit"))
+           {   showToast(res.message)
+              props.setResult('')}
+              else{
+                console.log(res.message)
+              showToast("Syntex error")
+              props.setResult(res.message)
+            }
           setLoading(false)
         }else{
           showToast("You need to login to submit")
