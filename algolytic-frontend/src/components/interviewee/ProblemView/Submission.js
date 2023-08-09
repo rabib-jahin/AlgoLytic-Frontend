@@ -7,7 +7,7 @@ const Submission = (props) => {
     const [data, setData] = useState([])
     const fetchSubmissions = async (data) => {
 
-        //   var res=await getSubmissions(data)
+          var res=await getSubmissions(data)
         var s = [
 
             {
@@ -29,13 +29,13 @@ const Submission = (props) => {
             }
 
         ]
-
-        setData(s)
+console.log(res)
+        setData(res.data)
     }
 
     useEffect(() => {
 
-        fetchSubmissions({ user_id: 1, problem_id: props.id })
+        fetchSubmissions( props.id )
 
     }, [])
 
@@ -49,7 +49,7 @@ const Submission = (props) => {
 
                 {
 
-                    data.length === 0 ? <CircularProgress color="success" style={{ marginLeft: "50%" }} /> : (
+                    data.length === 0 ? <h1>No Sumbissions</h1>  : (
 
 
                         data && data.map((d, idx) => {
@@ -58,7 +58,7 @@ const Submission = (props) => {
 
 
                                 <>
-                                    {(!d.verdict ? <><div style={{ display: "flex" }}><div className="err">Wrong Ans</div><div className="lang">{d.language}</div></div></> : <>
+                                    {(d.verdict=="false" ? <><div style={{ display: "flex" }}><div className="err">Wrong Ans</div><div className="lang">{d.language}</div></div></> : <>
                                         <div style={{ display: "flex" }}>
                                             <div className="accepted">Accepted</div>
                                             <div className="lang">{d.language}</div></div></>)}
