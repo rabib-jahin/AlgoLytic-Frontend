@@ -174,6 +174,14 @@ else if (password !== repass)
         >
           <a href="#">Subscription</a>
         </li>
+
+        <li
+          className={activeOption === "subscription" ? "active" : ""}
+          onClick={() => handleOptionClick("subscription")}
+        >
+          <a href="#">Test</a>
+        </li>
+        
       </ul>
       <div className="header-right">
         {isAuth ? (
