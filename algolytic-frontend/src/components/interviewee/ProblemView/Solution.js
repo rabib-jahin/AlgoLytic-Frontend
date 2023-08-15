@@ -9,27 +9,40 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Editor from "@monaco-editor/react";
 import Button from '@mui/material/Button';
+import { checkStatus } from "../../../actions/interviewee/auth";
 
 const Solution = (props) => {
     const[data,setData]=useState([])
+    const [status,setStatus]=useState(false)
     const[dialogOpen,setDialogOpen]=useState(false)
       const [code,setCode]=useState("")
     const [lang,setLang]=useState("cpp")
+
+    const fetchStatus=async()=>{
+
+        var res=await checkStatus();
+        
+    setStatus(res.status)
+    
+      }
+   
     const fetchSolutions=async (id)=>{
         var res=await getSolutions(id)
         
-       setData(res.data)
-       console.log(res.data)
+       setData(res?res.data:[])
+   
       }
     useEffect(()=>{
-    
+        fetchStatus()
         fetchSolutions(props.id)
+   
+    
        
       },[])
     return (
         <div className="solution">
-            {data.length===0?<> No solutions found</>:(
-data&& data.map(d=>(
+            {data.length===0?<> No solutions found</>:data[0].problem.isPremium==1 && status==false?<>Subscribe to view solutions!!</>:
+(data && data.map(d=>(
 
 <div class="card-1" onClick={()=>{setDialogOpen(true);setCode(d.solution);setLang(d.language)}} >
 <div class="lang2">

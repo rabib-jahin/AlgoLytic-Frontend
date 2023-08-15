@@ -77,7 +77,7 @@ fetchStatus();
             </div>
           ) : tab === "solution" ? (
             <div className="solution">
-              <Solution id={id}/>
+              <Solution id={id} status={status}/>
             </div>
           ) : (
             <div className="submission">

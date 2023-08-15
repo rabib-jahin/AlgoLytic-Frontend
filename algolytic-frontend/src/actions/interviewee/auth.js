@@ -15,14 +15,14 @@ export const checkStatus=async()=>{
     let base_url=getApiUrl();
     if(!(cookies.get('token')==undefined || cookies.get('token')==null)){
         var res=await axios.get(base_url+'/auth/status',{headers:{authorization:'Bearer '+cookies.get('token')}}).catch(e=>console.log(e))
-    console.log(res)
-        if(res.data.data[0].sub_id!="1"){
+ 
+        if(res?.data?.data[0]?.sub_id!="1"){
         return {status:true,id:res.data.data[0].sub_id}
     }
-    return {status:false,id:res.data.data[0].sub_id}
+    return {status:false,id:0}
     }
    
-    return {status:false,id:res.data.data[0].sub_id}
+    return {status:false,id:0}
 }
 export const checkLoading=()=>{
     return loader

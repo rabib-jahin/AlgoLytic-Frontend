@@ -38,7 +38,7 @@ const Submission = (props) => {
 
         ]
 console.log(res)
-        setData(res.data)
+        setData(res?res.data:[])
     }
 
     useEffect(() => {

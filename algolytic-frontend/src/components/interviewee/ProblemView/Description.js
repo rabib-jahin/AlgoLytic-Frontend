@@ -26,6 +26,7 @@ const Description= (props) => {
           setTimeout(function() {
             // Your code to be executed after the delay
           }, 500);
+          window.sessionStorage.setItem("option","subscription")
           window.location.href="/subscription"
                 }	
       
