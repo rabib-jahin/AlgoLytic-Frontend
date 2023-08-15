@@ -6,6 +6,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
+
 import "../../../assets/css/interviewee/problemview/submitcode.css";
 import CodeEditorWindow from "./CodeEditorWindow";
 
@@ -43,7 +44,7 @@ python:`print('hello world')`
 
     const [code, setCode] = useState(defaultCode['cpp']);
     const [theme, setTheme] = useState("cobalt");
-    const [language, setLanguage] = React.useState('cpp');
+    const [language, setLanguage] = useState('cpp');
 
     useEffect(()=>{
       console.log(code)
@@ -93,8 +94,9 @@ python:`print('hello world')`
           setVerdict(null)
         
           var res=await submitCode(body)
+
           setVerdict(res.verdict)
-          console.log(res.message)
+          console.log(res)
           if(!res.verdict)
             if(res.message.includes("Syntax")|| res.message.includes("Output ")|| res.message.includes("Time Limit"))
            {   showToast(res.message)

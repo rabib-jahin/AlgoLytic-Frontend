@@ -6,7 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { devApi, prodApi } from "./config";
 import UserProgressContainer from "./components/interviewee/UserProgress/UserProgressContainer";
 import ProblemView from "./components/interviewee/ProblemView/ProblemView";
-
+import Subscription from "./components/interviewee/subscription/Subscription";
 var showToast, getApiUrl;
 
 
@@ -44,6 +44,12 @@ function App() {
             path="/problem/:id"
             exact
             element={<ProblemView />}
+          />
+
+<Route
+            path="/subscription"
+            exact
+            element={<Subscription />}
           />
         </Routes>
       </BrowserRouter>
