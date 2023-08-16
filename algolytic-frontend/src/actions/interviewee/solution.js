@@ -16,7 +16,10 @@ export const getSolutions=async (id)=>{
 
    
   
-    return res?.data
+    if(res){
+        return res.data
+    }
+    return null
 
 
 

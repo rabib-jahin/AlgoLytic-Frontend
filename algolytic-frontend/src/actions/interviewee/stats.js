@@ -32,7 +32,11 @@ export const getSubmissions=async (id)=>{
       
     });
  
-    return res.data
+    if(res){
+      return res.data
+    }
+    else
+    return null
 
 
 
