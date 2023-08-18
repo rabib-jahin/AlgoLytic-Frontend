@@ -58,8 +58,7 @@ async	function compile() {
 			headers: {
 			  'content-type': 'application/json',
 			  'Content-Type': 'application/json',
-			//   'X-RapidAPI-Key': '42ab40d041mshd450343e6f5a3d6p19d919jsn156ff826ef0c',
-			'X-RapidAPI-Key':'6d1b311116mshc7d00200fa62399p1afe3fjsn6cf3594ddea6',
+		'X-RapidAPI-Key':'your key',
 			'X-RapidAPI-Host': 'judge0-ce.p.rapidapi.com'
 			},
 			data: {
