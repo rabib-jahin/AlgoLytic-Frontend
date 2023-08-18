@@ -7,6 +7,7 @@ import { devApi, prodApi } from "./config";
 import UserProgressContainer from "./components/interviewee/UserProgress/UserProgressContainer";
 import ProblemView from "./components/interviewee/ProblemView/ProblemView";
 import Subscription from "./components/interviewee/subscription/Subscription";
+import Runner from "./components/interviewee/Runner"
 var showToast, getApiUrl;
 
 
@@ -50,6 +51,13 @@ function App() {
             path="/subscription"
             exact
             element={<Subscription />}
+          />
+       
+
+        <Route
+            path="/run"
+            exact
+            element={<Runner />}
           />
         </Routes>
       </BrowserRouter>
