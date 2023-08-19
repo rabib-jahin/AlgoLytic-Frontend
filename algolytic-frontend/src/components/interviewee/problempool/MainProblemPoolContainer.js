@@ -21,7 +21,7 @@ const MainProblemPoolContainer = (props) => {
 
     return (
         <>
-            {/* <UserProblemStatCard probs={probs} fetchProblems={fetchProblems}/> */}
+            <UserProblemStatCard probs={probs} fetchProblems={fetchProblems}/>
             <Filtering setBody={setBody} body={body} fetchProblems={fetchProblems} setProbs={setProblems} probs={probs}/>
             <ProblemList fetchProblems={fetchProblems} setProbs={setProblems} probs={probs}/>
         </>     

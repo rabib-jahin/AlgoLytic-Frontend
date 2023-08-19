@@ -4,21 +4,19 @@ import { getApiUrl } from '../../App';
 
 const cookies = new Cookies();
 
-export const getSubmissionStats=async (data)=>{
+export const getSubmissionStats=async ()=>{
     let base_url=getApiUrl();
     //console.log(base_url+"/tag/list")
   
-    var res=await axios.post(base_url+"/problem/submissionstats",data,)
+    var res=await axios.get(base_url+"/problem/submissionStats",{headers:{authorization:'Bearer '+cookies.get('token')}})
     .catch(error => {
       console.log(error);
       
     });
 
-    return {
-      data:"demo"
-    }
+   
   
-    return res.data
+    return res?.data
 
 
 
@@ -34,7 +32,11 @@ export const getSubmissions=async (id)=>{
       
     });
  
-    return res.data
+    if(res){
+      return res.data
+    }
+    else
+    return null
 
 
 

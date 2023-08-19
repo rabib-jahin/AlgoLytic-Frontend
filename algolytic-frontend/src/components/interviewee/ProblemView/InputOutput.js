@@ -30,13 +30,13 @@ fetchProblem(props.id)
             <div className="input">
 
                 <h3 className="in">Sample Input</h3>
-                <h4 className="in">{Object.keys(data).length==0?"":data.data_json?.input}</h4>
+                <h4 className="in">{Object.keys(data).length==0?"":data.isPremium==0||props.status?data.data_json?.input:""}</h4>
                 
             </div>
             <div className="output">
 
                 <h3 className="out">Sample Output</h3>
-                <h4 className="out">{Object.keys(data).length==0?"":data.data_json?.output}</h4>
+                <h4 className="out">{Object.keys(data).length==0?"":data.isPremium==0||props.status?data.data_json?.output:""}</h4>
                 {
                     verdict===null?(
                         <></>

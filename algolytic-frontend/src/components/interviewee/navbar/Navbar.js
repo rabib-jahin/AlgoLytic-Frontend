@@ -42,6 +42,7 @@ const NavBar = (props) => {
 
   const handleOptionClick = (option) => {
     setActiveOption(option);
+    window.sessionStorage.setItem("option", option);
   };
 
   const [isAuth, setAuth] = useState(checkAuth());
@@ -102,6 +103,7 @@ else if (password !== repass)
       setAuth(true)
       setAuthLoading(false)
       setAuthDialogOpen(false)
+      window.location.reload();
      }else{
       if(res.message){
         showToast(res.message)  
@@ -123,6 +125,7 @@ else if (password !== repass)
     
   
     showToast("Logged Out");
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -151,33 +154,33 @@ else if (password !== repass)
       </div>
       <ul className="navbar-menu">
         <li
-          className={activeOption === "problems" ? "active" : ""}
+          className={    window.sessionStorage.getItem("option") === "problems" ? "active":""}
           onClick={() => handleOptionClick("problems")}
         >
-          <Link to="/">Problems</Link>
+          <a href="/">Problems</a>
         </li>
         <li
-          className={activeOption === "learn" ? "active" : ""}
+          className={window.sessionStorage.getItem("option")  === "learn" ? "active" : ""}
           onClick={() => handleOptionClick("learn")}
         >
           <a href="#">Learn</a>
         </li>
         <li
-          className={activeOption === "recommendation" ? "active" : ""}
+          className={ window.sessionStorage.getItem("option") ==="recommendation"? "active" : ""}
           onClick={() => handleOptionClick("recommendation")}
         >
           <a href="/Recommendation">Recommendation</a>
         </li>
         <li
-          className={activeOption === "subscription" ? "active" : ""}
+          className={ window.sessionStorage.getItem("option")==="subscription" ? "active" : ""}
           onClick={() => handleOptionClick("subscription")}
         >
-          <a href="#">Subscription</a>
+          <a href="/subscription">Subscription</a>
         </li>
 
         <li
-          className={activeOption === "subscription" ? "active" : ""}
-          onClick={() => handleOptionClick("subscription")}
+          className={activeOption === "test" ? "active" : ""}
+          onClick={() => handleOptionClick("test")}
         >
           <a href="#">Test</a>
         </li>

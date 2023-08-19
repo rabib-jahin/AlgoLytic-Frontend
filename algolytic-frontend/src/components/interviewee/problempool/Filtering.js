@@ -27,7 +27,7 @@ const Filtering = (props) => {
       items: tags,
     },
     {
-      name: 'Premium',
+      name: 'Status',
       items: ['Regular', 'Premium'],
     },
   ];

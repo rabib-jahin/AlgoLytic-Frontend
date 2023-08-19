@@ -9,7 +9,11 @@ import "../../../assets/css/interviewee/problemview/test.css";
 import InputOutput from "./InputOutput";
 import SubmitCode from "./SubmitCode";
 import Submission from "./Submission";
+
 import ShareProblem from "./ShareProblem";
+
+
+import { checkStatus } from "../../../actions/interviewee/auth";
 
 const ProblemView = (props) => {
   const [description, setDescription] = useState("");
@@ -18,16 +22,24 @@ const ProblemView = (props) => {
   const [submission, setSubmission] = useState("");
   const [result,setResult]=useState('')
   const [tab, setTab] = useState("description");
+  const [status,setStatus]=useState(false)
   const { id } = useParams()
 
   const handleTabClick = (option) => {
     setTab(option);
   };
 
+  const fetchStatus=async()=>{
+
+    var res=await checkStatus();
+    
+setStatus(res.status)
+
+  }
 useEffect(()=>{
 
   
-console.log(id)
+fetchStatus();
 
 
 
@@ -62,8 +74,12 @@ console.log(id)
         <div className="show-pane">
           {tab === "description" ? (
             <div className="description">
+
              <Description id={id}/>
              <ShareProblem/>
+
+             <Description id={id} status={status}/>
+
             </div>
           ) : tab === "discussion" ? (
             <div className="discussion">
@@ -71,7 +87,7 @@ console.log(id)
             </div>
           ) : tab === "solution" ? (
             <div className="solution">
-              <Solution id={id}/>
+              <Solution id={id} status={status}/>
             </div>
           ) : (
             <div className="submission">
@@ -82,7 +98,7 @@ console.log(id)
       </div>
       <div className="right">
         <SubmitCode setVerdict={setVerdict} setResult={setResult} id={id} />
-        <InputOutput verdict={verdict} id={id} result={result}/>
+        <InputOutput verdict={verdict} id={id} result={result} status={status}/>
       </div>
     </div>
   );
