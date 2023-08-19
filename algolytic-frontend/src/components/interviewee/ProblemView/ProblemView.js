@@ -9,7 +9,12 @@ import "../../../assets/css/interviewee/problemview/test.css";
 import InputOutput from "./InputOutput";
 import SubmitCode from "./SubmitCode";
 import Submission from "./Submission";
+
+import ShareProblem from "./ShareProblem";
+
+
 import { checkStatus } from "../../../actions/interviewee/auth";
+
 const ProblemView = (props) => {
   const [description, setDescription] = useState("");
   const [discussion, setDiscussion] = useState("");
@@ -71,7 +76,12 @@ fetchStatus();
         <div className="show-pane">
           {tab === "description" ? (
             <div className="description">
+
+             <Description id={id}/>
+             <ShareProblem/>
+
              <Description id={id} status={status}/>
+
             </div>
           ) : tab === "discussion" ? (
             <div className="discussion">
