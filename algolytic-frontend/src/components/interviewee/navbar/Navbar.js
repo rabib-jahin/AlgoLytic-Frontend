@@ -166,7 +166,7 @@ else if (password !== repass)
           className={activeOption === "recommendation" ? "active" : ""}
           onClick={() => handleOptionClick("recommendation")}
         >
-          <a href="#">Recommendation</a>
+          <a href="/Recommendation">Recommendation</a>
         </li>
         <li
           className={activeOption === "subscription" ? "active" : ""}

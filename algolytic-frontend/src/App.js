@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { devApi, prodApi } from "./config";
 import UserProgressContainer from "./components/interviewee/UserProgress/UserProgressContainer";
 import ProblemView from "./components/interviewee/ProblemView/ProblemView";
+import Recommendation from "./components/interviewee/Recommendation/Recommendation";
 
 var showToast, getApiUrl;
 
@@ -44,6 +45,12 @@ function App() {
             path="/problem/:id"
             exact
             element={<ProblemView />}
+          />
+
+              <Route
+            path="Recommendation"
+            exact
+            element={<Recommendation />}
           />
         </Routes>
       </BrowserRouter>

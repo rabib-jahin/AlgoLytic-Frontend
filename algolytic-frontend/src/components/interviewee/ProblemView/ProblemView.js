@@ -9,6 +9,8 @@ import "../../../assets/css/interviewee/problemview/test.css";
 import InputOutput from "./InputOutput";
 import SubmitCode from "./SubmitCode";
 import Submission from "./Submission";
+import ShareProblem from "./ShareProblem";
+
 const ProblemView = (props) => {
   const [description, setDescription] = useState("");
   const [discussion, setDiscussion] = useState("");
@@ -61,6 +63,7 @@ console.log(id)
           {tab === "description" ? (
             <div className="description">
              <Description id={id}/>
+             <ShareProblem/>
             </div>
           ) : tab === "discussion" ? (
             <div className="discussion">
