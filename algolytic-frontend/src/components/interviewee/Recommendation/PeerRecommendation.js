@@ -20,6 +20,7 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { getProbList } from "../../../actions/interviewee/problemList";
+import { getUsers } from "../../../actions/interviewee/recommenedpblmList";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -85,10 +86,13 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     };
   
     const [problems,setProblems]=useState({})
+   
   
     useEffect(()=>{
       setProblems(props.probs)
     },[props.probs])
+
+  
   
     const handleChangeRowsPerPage = (
       event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -107,11 +111,11 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     }
   
     useEffect(() => {
-      let data = {}
+      // let data = {}
   
-      props.fetchProblems()
-      console.log(props.probs)
-      console.log("rows", rows)
+      // props.fetchProblems()
+      // console.log(props.probs)
+      // console.log("rows", rows)
   
     }, [])
   
@@ -143,9 +147,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
                   )?.map((row) => (
                     
-                    <StyledTableRow key={row.title} align="left">
+                    <StyledTableRow key={row.peer_id} align="left">
 
-                    <StyledTableCell align="left">Rumi</StyledTableCell>
+                    <StyledTableCell align="left">{row.from}</StyledTableCell>
 
                     <StyledTableCell align="left" component="th" scope="row">
                       
@@ -153,17 +157,19 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
                       
                   
                     </StyledTableCell>
-                    <StyledTableCell  align="left" onClick={()=>redirectProb(row.problem_id)}>{row.title}
+                    
+       
+                    <StyledTableCell  align="left" onClick={()=>redirectProb(row.problem_id)}>{row.problem.title}
                       {
-                          row.isPremium?<WorkspacePremiumIcon color="primary"/>:null
+                          row.problem.isPremium?<WorkspacePremiumIcon color="primary"/>:null
                       }
                     </StyledTableCell>
                     
                      
                      
-                    <StyledTableCell align="left">{row.acceptance}</StyledTableCell>
-                    <StyledTableCell align="left">{row.difficulty}</StyledTableCell>
-                    <StyledTableCell align="left">{row.tag}</StyledTableCell>
+                    <StyledTableCell align="left">{row.problem.acceptance}</StyledTableCell>
+                    <StyledTableCell align="left">{row.problem.difficulty}</StyledTableCell>
+                    <StyledTableCell align="left">{row.problem.tag}</StyledTableCell>
                   </StyledTableRow>
                   ))}
             </TableBody>

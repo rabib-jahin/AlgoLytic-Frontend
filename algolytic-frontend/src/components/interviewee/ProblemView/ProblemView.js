@@ -3,6 +3,7 @@ import Solution from "./Solution"
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { getUsers } from "../../../actions/interviewee/recommenedpblmList";
 
 // import "../../../assets/css/interviewee/problemview/probView.css";
 import "../../../assets/css/interviewee/problemview/test.css";
@@ -25,7 +26,15 @@ const ProblemView = (props) => {
   const [status,setStatus]=useState(false)
   const { id } = useParams()
 
+  const [users,setUsers]=useState([])
 
+    const fetchUsers=async()=>{
+
+      var res=await getUsers()
+      setUsers(res?.data)
+      console.log(res?.data)
+    }
+   
 
   const handleTabClick = (option) => {
     setTab(option);
@@ -42,7 +51,17 @@ useEffect(()=>{
 
   
 fetchStatus();
+fetchUsers()
 
+
+
+},[])
+
+useEffect(()=>{
+
+  
+fetchStatus();
+fetchUsers()
 
 
 
@@ -77,8 +96,8 @@ fetchStatus();
           {tab === "description" ? (
             <div className="description">
 
-             <Description id={id}/>
-             <ShareProblem/>
+         
+             <ShareProblem users={users} id={id}/>
 
              <Description id={id} status={status}/>
 

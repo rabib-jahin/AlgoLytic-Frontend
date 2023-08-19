@@ -5,12 +5,13 @@ import Button from '@mui/material/Button';
 
 import "../../../assets/css/interviewee/userprogress/usercontainer.css";
 import { getProbList } from "../../../actions/interviewee/problemList";
+import { getRecommendedpblmList } from "../../../actions/interviewee/recommenedpblmList";
 
 
 
 const Recommendation = (props) => {
 
-    const [tab, setTab] = useState("personalized");
+    const [tab, setTab] = useState("");
 
     const handleTabClick = (option) => {
         setTab(option);
@@ -18,9 +19,11 @@ const Recommendation = (props) => {
     
     const [probs,setProbs]=useState({})
    const [body,setBody]=useState({})
-    const fetchProblems=async ()=>{
+    const fetchProblems=async (data)=>{
+
+        setTab(data);
         setProbs({})
-        var res=await getProbList(body)
+        var res=await getRecommendedpblmList()
         console.log(res)
         setProbs(res);
    
@@ -37,7 +40,7 @@ const Recommendation = (props) => {
             <Button style={{ marginTop: '8px' }} variant="outlined" className="dropdown-item text-green2" onClick={()=>handleTabClick("personalized")} style={{ marginLeft: "50px", height: "60px", marginTop: "40px" }}>
                 Personalized
             </Button>
-            <Button style={{ marginTop: '8px' }} variant="outlined" className="dropdown-item text-green2" onClick={()=>handleTabClick("peer")} style={{ marginLeft: "50px", height: "60px", marginTop: "40px" }}>
+            <Button style={{ marginTop: '8px' }} variant="outlined" className="dropdown-item text-green2" onClick={()=>fetchProblems("peer")} style={{ marginLeft: "50px", height: "60px", marginTop: "40px" }}>
                 Peer
             </Button>
             
