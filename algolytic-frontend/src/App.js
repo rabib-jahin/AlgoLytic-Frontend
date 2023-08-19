@@ -65,7 +65,9 @@ function App() {
             exact
             element={<Recommendation />}
 
-<Route
+            />
+
+               <Route
             path="/subscription"
             exact
             element={<Subscription />}
