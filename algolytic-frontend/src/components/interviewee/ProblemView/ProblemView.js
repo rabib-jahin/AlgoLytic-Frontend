@@ -25,6 +25,8 @@ const ProblemView = (props) => {
   const [status,setStatus]=useState(false)
   const { id } = useParams()
 
+
+
   const handleTabClick = (option) => {
     setTab(option);
   };
@@ -97,7 +99,7 @@ fetchStatus();
         </div>
       </div>
       <div className="right">
-        <SubmitCode setVerdict={setVerdict} setResult={setResult} id={id} />
+        <SubmitCode setVerdict={setVerdict} setResult={setResult} id={id}  />
         <InputOutput verdict={verdict} id={id} result={result} status={status}/>
       </div>
     </div>

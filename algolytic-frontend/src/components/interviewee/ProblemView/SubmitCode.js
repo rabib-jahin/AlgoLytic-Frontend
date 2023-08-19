@@ -19,9 +19,9 @@ import { showToast } from "../../../App";
 
 
 const SubmitCode = (props) => {
-    const [text,setText]=useState("")
 
-    const defaultCode={
+
+const defaultCode={
 cpp:`#include<iostream>
 using namespace std;
 
@@ -42,7 +42,11 @@ javascript:`console.log('Hello World')`,
 python:`print('hello world')`
 }
 
-    const [code, setCode] = useState(defaultCode['cpp']);
+
+    const [text,setText]=useState("")
+
+    const [code,setCode]=useState(defaultCode['cpp'])
+
     const [theme, setTheme] = useState("cobalt");
     const [language, setLanguage] = useState('cpp');
 
@@ -145,7 +149,8 @@ submitProblem(code);
                       <div style={{display:"flex"}}>
                       <Button style={{marginLeft:"10%"}} color="primary" onClick={submit}>Submit</Button>
             
-
+                      <Button style={{marginLeft:"10%"}} color="primary" onClick={()=>{window.location.href="/run"}}>Test </Button>
+            
         <FormControl sx={{ m: 1, minWidth: 80 ,color:"white"}} style={{marginLeft:"30%"}}>
         <InputLabel id="demo-simple-select-autowidth-label" sx={{ color: "white" }}>Language</InputLabel>
         <Select

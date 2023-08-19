@@ -13,6 +13,8 @@ const Top = ({ userLang, setUserLang, userTheme,
 	const themes = [
 		{ value: "vs-dark", label: "Dark" },
 		{ value: "light", label: "Light" },
+	
+		  
 	]
 	return (
 		<div className="navbar">
