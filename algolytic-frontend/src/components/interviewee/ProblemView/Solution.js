@@ -72,7 +72,7 @@ height="calc(50vh - 80px)"
 width="500px"
 language={lang}
 value={code}
-theme={"vs-dark"}
+theme={"oceanic-next"}
 
 
 
