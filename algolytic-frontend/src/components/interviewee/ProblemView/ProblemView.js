@@ -3,29 +3,65 @@ import Solution from "./Solution"
 import React, { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import { Link } from "react-router-dom";
+import { getUsers } from "../../../actions/interviewee/recommenedpblmList";
 
 // import "../../../assets/css/interviewee/problemview/probView.css";
 import "../../../assets/css/interviewee/problemview/test.css";
 import InputOutput from "./InputOutput";
 import SubmitCode from "./SubmitCode";
 import Submission from "./Submission";
+
+import ShareProblem from "./ShareProblem";
+
+
+import { checkStatus } from "../../../actions/interviewee/auth";
+
 const ProblemView = (props) => {
   const [description, setDescription] = useState("");
   const [discussion, setDiscussion] = useState("");
   const [solution, setSolution] = useState("");
   const [submission, setSubmission] = useState("");
+  const [result,setResult]=useState('')
   const [tab, setTab] = useState("description");
+  const [status,setStatus]=useState(null)
   const { id } = useParams()
+
+  const [users,setUsers]=useState([])
+
+    const fetchUsers=async()=>{
+
+      var res=await getUsers()
+      setUsers(res?.data)
+      console.log(res?.data)
+    }
+   
 
   const handleTabClick = (option) => {
     setTab(option);
   };
 
+  const fetchStatus=async()=>{
+
+    var res=await checkStatus();
+    
+    setStatus(res.id>1)
+
+  }
 useEffect(()=>{
 
   
-console.log(id)
+fetchStatus();
+fetchUsers()
 
+
+
+},[])
+
+useEffect(()=>{
+
+  
+fetchStatus();
+fetchUsers()
 
 
 
@@ -59,7 +95,11 @@ console.log(id)
         <div className="show-pane">
           {tab === "description" ? (
             <div className="description">
-             <Description id={id}/>
+        
+             <ShareProblem users={users} id={id}/>
+
+             {status!==null && <Description id={id} status={status}/>}
+
             </div>
           ) : tab === "discussion" ? (
             <div className="discussion">
@@ -67,7 +107,7 @@ console.log(id)
             </div>
           ) : tab === "solution" ? (
             <div className="solution">
-              <Solution id={id}/>
+              <Solution id={id} status={status}/>
             </div>
           ) : (
             <div className="submission">
@@ -77,8 +117,8 @@ console.log(id)
         </div>
       </div>
       <div className="right">
-        <SubmitCode setVerdict={setVerdict} id={id} />
-        <InputOutput verdict={verdict} id={id}/>
+        <SubmitCode setVerdict={setVerdict} setResult={setResult} id={id}  />
+        <InputOutput verdict={verdict} id={id} result={result} status={status}/>
       </div>
     </div>
   );

@@ -2,39 +2,41 @@ import Cookies from 'universal-cookie';
 import axios from 'axios'
 import { getApiUrl } from '../../App';
 
-export const getSubmissionStats=async (data)=>{
+const cookies = new Cookies();
+
+export const getSubmissionStats=async ()=>{
     let base_url=getApiUrl();
     //console.log(base_url+"/tag/list")
   
-    var res=await axios.post(base_url+"/problem/submissionstats",data)
+    var res=await axios.get(base_url+"/problem/submissionStats",{headers:{authorization:'Bearer '+cookies.get('token')}})
     .catch(error => {
       console.log(error);
       
     });
 
-    return {
-      data:"demo"
-    }
+   
   
-    return res.data
+    return res?.data
 
 
 
 }
 
-export const getSubmissions=async (data)=>{
+export const getSubmissions=async (id)=>{
     let base_url=getApiUrl();
     //console.log(base_url+"/tag/list")
   
-    var res=await axios.post(base_url+"/problem/submissions",data)
+    var res=await axios.get(base_url+"/problem/submissions/"+id,{headers:{authorization:'Bearer '+cookies.get('token')}})
     .catch(error => {
       console.log(error);
       
     });
-  return {
-    data:"hello"
-  }
-    return res.data
+ 
+    if(res){
+      return res.data
+    }
+    else
+    return null
 
 
 

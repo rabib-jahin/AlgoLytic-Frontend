@@ -12,6 +12,28 @@ export const checkAuth=()=>{
     return !(cookies.get('token')==undefined || cookies.get('token')==null)
 }
 
+export const checkAdmin=async()=>{
+    let base_url=getApiUrl();
+    if(!(cookies.get('token')==undefined || cookies.get('token')==null)){
+        var res=await axios.get(base_url+'/auth/checkadmin',{headers:{authorization:'Bearer '+cookies.get('token')}}).catch(e=>console.log(e))
+ console.log(res?.data)
+        return res?.data
+    }
+   
+    return false
+}
+
+
+export const checkStatus=async()=>{
+    let base_url=getApiUrl();
+    if(!(cookies.get('token')==undefined || cookies.get('token')==null)){
+        var res=await axios.get(base_url+'/auth/status',{headers:{authorization:'Bearer '+cookies.get('token')}}).catch(e=>console.log(e))
+        return {status:true,id:res.data.data[0].sub_id}
+    }
+   
+    return {status:false,id:0}
+}
+
 export const checkLoading=()=>{
     return loader
 }
@@ -21,8 +43,9 @@ export const loginUser=async(data)=>{
     loader=true
  
    var res=await axios.post(base_url+'/auth/login',data).catch(e=>console.log(e))
-        if(res.data.success){
-            cookies.set('token',res.data.access_token,{ path: '/', maxAge: COOKIE_AGE }) //setting token
+   console.log(res.data)  
+   if(res.data.success){
+            cookies.set('token',res.data.token,{ path: '/', maxAge: COOKIE_AGE }) //setting token
           
         }
  return res.data

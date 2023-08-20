@@ -12,7 +12,7 @@ export const getProbData=async (id)=>{
       
     });
   
-    return res.data
+    return res?.data
 
 
 

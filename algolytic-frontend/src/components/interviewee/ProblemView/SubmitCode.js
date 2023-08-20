@@ -6,34 +6,57 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
+
 import "../../../assets/css/interviewee/problemview/submitcode.css";
 import CodeEditorWindow from "./CodeEditorWindow";
 
 
 
 import { defineTheme } from "./defineTheme";
+import { checkAuth } from "../../../actions/interviewee/auth";
+import { showToast } from "../../../App";
 
 
 
 const SubmitCode = (props) => {
-    const [text,setText]=useState("")
-    
 
-    const defaultCode=`#include<iostream>
+
+const defaultCode={
+cpp:`#include<iostream>
 using namespace std;
 
 int main(){
     //your code here;
     
     return 0;
-}`
+}`,
+java:`// Java IDE for Algolytic
+// Use this editor to write, compile and run your Java code online
 
-    const [code, setCode] = useState(defaultCode);
+class Main {
+    public static void main(String[] args) {
+        //System.out.println("Hello, World!");
+    }
+}`,
+javascript:`console.log('Hello World')`,
+python:`print('hello world')`
+}
+
+
+    const [text,setText]=useState("")
+
+    const [code,setCode]=useState(defaultCode['cpp'])
+
     const [theme, setTheme] = useState("cobalt");
-    const [language, setLanguage] = React.useState('cpp');
+    const [language, setLanguage] = useState('cpp');
+
+    useEffect(()=>{
+      console.log(code)
+    },[code])
 
     const handleChange = (event: SelectChangeEvent) => {
       setLanguage(event.target.value);
+      setCode(defaultCode[event.target.value])
     };
   
 
@@ -53,22 +76,45 @@ int main(){
       const [loading,setLoading]=useState(false)
       const setVerdict=props.setVerdict
 
+      const compilerToIdeMapping={
+        cpp:'cpp',
+        java:'java',
+        javascript:'nodejs',
+        python:'python3'
+      }
+
       const submitProblem=async (data)=>{
-        let body={
+        if(checkAuth()){
+          let body={
 
             problem_id:parseInt(props.id),
-            user_id:1,
+            
             code:data,
+            lang:compilerToIdeMapping[language]
 
+          }
+          console.log(body)
+          setLoading(true)
+          setVerdict(null)
+        
+          var res=await submitCode(body)
+
+          setVerdict(res.verdict)
+          console.log(res)
+          if(!res.verdict)
+            if(res.message.includes("Syntax")|| res.message.includes("Output ")|| res.message.includes("Time Limit"))
+           {   showToast(res.message)
+              props.setResult('')}
+              else{
+                console.log(res.message)
+              showToast("Syntex error")
+              props.setResult(res.message)
+            }
+          setLoading(false)
+        }else{
+          showToast("You need to login to submit")
         }
-        console.log(body)
-        setLoading(true)
-        setVerdict(null)
-       
-        var res=await submitCode(body)
-        console.log(res)
-        setVerdict(res.verdict)
-        setLoading(false)
+        
       }
 
     const submit=()=>{
@@ -89,6 +135,7 @@ submitProblem(code);
             {/* <textarea className="text" onChange={(e)=>setText(e.target.value)}></textarea> */}
             <CodeEditorWindow 
                 code={code}
+                key={language}
                 onChange={onChange}
                 language={language}
                 theme={theme.value}
@@ -102,7 +149,8 @@ submitProblem(code);
                       <div style={{display:"flex"}}>
                       <Button style={{marginLeft:"10%"}} color="primary" onClick={submit}>Submit</Button>
             
-
+                      <Button style={{marginLeft:"10%"}} color="primary" onClick={()=>{window.location.href="/run"}}>Test </Button>
+            
         <FormControl sx={{ m: 1, minWidth: 80 ,color:"white"}} style={{marginLeft:"30%"}}>
         <InputLabel id="demo-simple-select-autowidth-label" sx={{ color: "white" }}>Language</InputLabel>
         <Select
@@ -117,6 +165,7 @@ submitProblem(code);
           <MenuItem value={'cpp'}>c++</MenuItem>
           <MenuItem value={'java'}>java</MenuItem>
           <MenuItem value={'javascript'}>javascript</MenuItem>
+          <MenuItem value={'python'}>python</MenuItem>
         </Select>
       </FormControl>
 

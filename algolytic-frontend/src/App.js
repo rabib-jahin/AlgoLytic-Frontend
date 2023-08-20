@@ -1,4 +1,5 @@
 import NavBar from "./components/interviewee/navbar/Navbar";
+import { useState } from 'react';
 import { ToastContainer, toast as oldToast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainProblemPoolContainer from "./components/interviewee/problempool/MainProblemPoolContainer";
@@ -7,10 +8,23 @@ import { devApi, prodApi } from "./config";
 import UserProgressContainer from "./components/interviewee/UserProgress/UserProgressContainer";
 import ProblemView from "./components/interviewee/ProblemView/ProblemView";
 
+import Recommendation from "./components/interviewee/Recommendation/Recommendation";
+import ProblemCreate from "./components/interviewee/problempool/ProblemCreate"
+import Subscription from "./components/interviewee/subscription/Subscription";
+import Runner from "./components/interviewee/Runner"
+import PostPayment from "./components/interviewee/PostPayment";
+
 var showToast, getApiUrl;
 
 
 function App() {
+
+  
+
+
+  
+
+
   getApiUrl = () => {
     var env = process.env.NODE_ENV;
     if (env === "development") return devApi;
@@ -19,7 +33,7 @@ function App() {
 
   showToast = (message) => {
     oldToast.dark(message, {
-      position: "bottom-right",
+      position: "top-right",
       autoClose: 3000,
       hideProgressBar: false,
       closeOnClick: true,
@@ -43,7 +57,43 @@ function App() {
               <Route
             path="/problem/:id"
             exact
-            element={<ProblemView />}
+            element={<ProblemView  />}
+          />
+
+
+              <Route
+            path="Recommendation"
+            exact
+            element={<Recommendation />}
+
+            />
+
+          <Route
+            path="/subscription"
+            exact
+            element={<Subscription />}
+          />
+
+        <Route
+            path="/post-payment/:status"
+            exact
+            element={<PostPayment />}
+          />
+       
+
+        <Route
+            path="/run"
+            exact
+            element={<Runner />}
+
+          />
+
+          
+        <Route
+            path="/create"
+            exact
+            element={<ProblemCreate />}
+
           />
         </Routes>
       </BrowserRouter>
