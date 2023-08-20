@@ -22,7 +22,7 @@ const ProblemView = (props) => {
   const [submission, setSubmission] = useState("");
   const [result,setResult]=useState('')
   const [tab, setTab] = useState("description");
-  const [status,setStatus]=useState(false)
+  const [status,setStatus]=useState(null)
   const { id } = useParams()
 
 
@@ -35,7 +35,7 @@ const ProblemView = (props) => {
 
     var res=await checkStatus();
     
-setStatus(res.status)
+    setStatus(res.id>1)
 
   }
 useEffect(()=>{
@@ -77,10 +77,9 @@ fetchStatus();
           {tab === "description" ? (
             <div className="description">
 
-             <Description id={id}/>
              <ShareProblem/>
 
-             <Description id={id} status={status}/>
+             {status!==null && <Description id={id} status={status}/>}
 
             </div>
           ) : tab === "discussion" ? (
