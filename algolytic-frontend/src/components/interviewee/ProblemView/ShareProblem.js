@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
+import ShareIcon from '@mui/icons-material/Share';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
@@ -155,7 +156,7 @@ console.log(a)
 
   return (
     <div>
-      <Button style={{ marginTop: '8px' }} variant="outlined" onClick={handleClickOpen} style={{ marginLeft: "670px", height: "60px", marginTop: "-50px" }}>
+      <Button style={{ marginTop: '8px' }} variant="contained" onClick={handleClickOpen} style={{ marginLeft: "670px", marginTop: "-45px" }} startIcon={<ShareIcon/>}>
         Share
       </Button>
       <Dialog open={open} onClose={handleClose} className="dialogue">
@@ -185,6 +186,16 @@ console.log(a)
             options={users}
             getOptionLabel={(option) => option.login}
             defaultValue={[users[0]]}
+
+            renderOption={(props, option) => {
+              const { name } = option;
+              return (
+                <span {...props} style={{ color:'#222222',fontWeight:'bold' }}>
+                  {name}
+                </span>
+              );
+            }}
+
             renderInput={(params) => (
               <TextField
           
