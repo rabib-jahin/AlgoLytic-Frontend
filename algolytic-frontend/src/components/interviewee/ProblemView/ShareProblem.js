@@ -177,8 +177,9 @@ console.log(a)
           /> */}
           { users!=undefined && users.length>0  ?
           
-          <Stack spacing={3} sx={{ width: 500,input:{color:'black'} }}>
+          <Stack spacing={3}   sx={{ width: 500, color:'black' }}>
           <Autocomplete
+          
             multiple
             id="tags-standard"
             options={users}
@@ -186,13 +187,13 @@ console.log(a)
             defaultValue={[users[0]]}
             renderInput={(params) => (
               <TextField
-             
+          
            
                 {...params}
                 variant="standard"
                 label="Multiple values"
                 placeholder="Favorites"
-                sx={{input:{color:'black'}}}
+               
                
               
               />

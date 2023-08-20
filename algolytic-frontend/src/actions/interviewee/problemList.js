@@ -1,6 +1,7 @@
 import Cookies from 'universal-cookie';
 import axios from 'axios'
 import { getApiUrl } from '../../App';
+const cookies= new Cookies()
 
 export const getProbList=async (data)=>{
   let url=""
@@ -37,5 +38,19 @@ url=base_url+"/problem/filter?"+temp
     return res?.data
 
 
+
+}
+
+export const createProb=async (data)=>{
+  let base_url=getApiUrl();
+
+
+  var res=await axios.post(base_url+"/problem/create",data,{headers:{authorization:'Bearer '+cookies.get('token')}})
+  .catch(error => {
+    console.log(error);
+    
+  });
+
+  return res?.data
 
 }

@@ -9,7 +9,7 @@ import UserProgressContainer from "./components/interviewee/UserProgress/UserPro
 import ProblemView from "./components/interviewee/ProblemView/ProblemView";
 
 import Recommendation from "./components/interviewee/Recommendation/Recommendation";
-
+import ProblemCreate from "./components/interviewee/problempool/ProblemCreate"
 import Subscription from "./components/interviewee/subscription/Subscription";
 import Runner from "./components/interviewee/Runner"
 
@@ -78,6 +78,14 @@ function App() {
             path="/run"
             exact
             element={<Runner />}
+
+          />
+
+          
+        <Route
+            path="/create"
+            exact
+            element={<ProblemCreate />}
 
           />
         </Routes>
