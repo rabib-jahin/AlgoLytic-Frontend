@@ -20,6 +20,7 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { getProbList } from "../../../actions/interviewee/problemList";
+import { LinearProgress } from "@mui/material";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
 
@@ -171,8 +172,13 @@ const ProblemList = (props) => {
   return (
     <>
       <TableContainer component={Paper} style={{ backgroundColor: "#262626" }}>
+          {
+              Object.keys(problems).length===0 && <LinearProgress style={{width:'100vw'}}/>
+            }
         <Table sx={{ minWidth: 200, marginTop: "100px" }} aria-label="customized table">
+          
           <TableHead>
+            
             <TableRow>
               <StyledTableCell>Status</StyledTableCell>
               <StyledTableCell align="left">Title</StyledTableCell>
@@ -182,7 +188,7 @@ const ProblemList = (props) => {
             </TableRow>
           </TableHead>
           <TableBody style={{ cursor: "pointer" }}>
-
+            
 
             {
               Object.keys(problems).length == 0 ? <></>
