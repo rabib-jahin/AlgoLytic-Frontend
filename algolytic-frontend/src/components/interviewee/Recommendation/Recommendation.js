@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import EmergencyShareIcon from '@mui/icons-material/EmergencyShare';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 import PersonalizedRecommendation from "./PersonalizedRecommendation";
 import PeerRecommendation from "./PeerRecommendation";
 import Button from '@mui/material/Button';
@@ -7,7 +9,6 @@ import "../../../assets/css/interviewee/userprogress/usercontainer.css";
 import { getProbList } from "../../../actions/interviewee/problemList";
 import { getRecommendedpblmList } from "../../../actions/interviewee/recommenedpblmList";
 
-import { getRec} from "../../../actions/interviewee/recommenedpblmList";
 
 
 const Recommendation = (props) => {
@@ -29,15 +30,7 @@ const Recommendation = (props) => {
         setProbs(res);
    
       }
-      const fetchSystemGenerated=async (data)=>{
-
-        setTab(data);
-        setProbs({})
-        var res=await getRec()
-        console.log(res)
-        setProbs(res);
-   
-      }
+      
 
       const setProblems=ps=>{
         console.log(ps)
@@ -47,10 +40,10 @@ const Recommendation = (props) => {
       
     return (
         <>
-            <Button style={{ marginTop: '8px' }} variant="outlined" className="dropdown-item text-green2" onClick={()=>handleTabClick("personalized")} style={{ marginLeft: "50px", height: "60px", marginTop: "40px" }}>
+            <Button startIcon={<AutoGraphIcon/>} style={{ marginTop: '8px' }} variant="contained" className="dropdown-item text-green2" onClick={()=>handleTabClick("personalized")} style={{ marginLeft: "50px", marginTop: "40px" }}>
                 Personalized
             </Button>
-            <Button style={{ marginTop: '8px' }} variant="outlined" className="dropdown-item text-green2" onClick={()=>fetchProblems("peer")} style={{ marginLeft: "50px", height: "60px", marginTop: "40px" }}>
+            <Button startIcon={<EmergencyShareIcon/>} style={{ marginTop: '8px' }} variant="contained" className="dropdown-item text-green2" onClick={()=>fetchProblems("peer")} style={{ marginLeft: "10px", marginTop: "40px" }}>
                 Peer
             </Button>
             
@@ -61,11 +54,11 @@ const Recommendation = (props) => {
             
             {tab === "personalized" ? (
                 <div className="personalized">
-                <PersonalizedRecommendation fetchProblems={fetchSystemGenerated} setProbs={setProblems} probs={probs}/>
+                <PersonalizedRecommendation tab="personalized"/>
                 </div>
             ) : (
                 <div className="peer">
-                 <PeerRecommendation fetchProblems={fetchProblems} setProbs={setProblems} probs={probs}/>
+                 <PeerRecommendation tab="peer" fetchProblems={fetchProblems} setProbs={setProblems} probs={probs}/>
                 </div>
             )}
             </div>
