@@ -7,6 +7,7 @@ import "../../../assets/css/interviewee/userprogress/usercontainer.css";
 import { getProbList } from "../../../actions/interviewee/problemList";
 import { getRecommendedpblmList } from "../../../actions/interviewee/recommenedpblmList";
 
+import { getRec} from "../../../actions/interviewee/recommenedpblmList";
 
 
 const Recommendation = (props) => {
@@ -24,6 +25,15 @@ const Recommendation = (props) => {
         setTab(data);
         setProbs({})
         var res=await getRecommendedpblmList()
+        console.log(res)
+        setProbs(res);
+   
+      }
+      const fetchSystemGenerated=async (data)=>{
+
+        setTab(data);
+        setProbs({})
+        var res=await getRec()
         console.log(res)
         setProbs(res);
    
@@ -51,7 +61,7 @@ const Recommendation = (props) => {
             
             {tab === "personalized" ? (
                 <div className="personalized">
-                <PersonalizedRecommendation fetchProblems={fetchProblems} setProbs={setProblems} probs={probs}/>
+                <PersonalizedRecommendation fetchProblems={fetchSystemGenerated} setProbs={setProblems} probs={probs}/>
                 </div>
             ) : (
                 <div className="peer">
