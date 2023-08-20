@@ -20,6 +20,8 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { getProbList } from "../../../actions/interviewee/problemList";
+import { getRec} from "../../../actions/interviewee/recommenedpblmList";
+
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
@@ -85,9 +87,9 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
   
     const [problems,setProblems]=useState({})
   
-    useEffect(()=>{
-      setProblems(props.probs)
-    },[props.probs])
+    // useEffect(()=>{
+    //   setProblems(props.probs)
+    // },[props.probs])
   
     const handleChangeRowsPerPage = (
       event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -95,6 +97,14 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       setRowsPerPage(parseInt(event.target.value, 10));
       setPage(0);
     };
+
+    const fetchSystemGenerated=async (data)=>{
+      // setProbs({})
+      var res=await getRec()
+      setProblems(res);
+
+ 
+    }
   
   
   
@@ -104,15 +114,12 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
       window.location.href = "/problem/" + id
   
     }
+
+
   
     useEffect(() => {
-      let data = {}
-  
-      props.fetchProblems()
-      console.log(props.probs)
-      console.log("rows", rows)
-  
-    }, [])
+      fetchSystemGenerated()
+    }, [props.tab])
   
     return (
       <>
