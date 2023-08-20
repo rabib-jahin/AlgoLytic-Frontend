@@ -12,6 +12,7 @@ import Recommendation from "./components/interviewee/Recommendation/Recommendati
 
 import Subscription from "./components/interviewee/subscription/Subscription";
 import Runner from "./components/interviewee/Runner"
+import PostPayment from "./components/interviewee/PostPayment";
 
 var showToast, getApiUrl;
 
@@ -67,10 +68,16 @@ function App() {
 
             />
 
-               <Route
+          <Route
             path="/subscription"
             exact
             element={<Subscription />}
+          />
+
+        <Route
+            path="/post-payment/:status"
+            exact
+            element={<PostPayment />}
           />
        
 
