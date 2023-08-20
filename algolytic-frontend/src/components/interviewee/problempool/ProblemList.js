@@ -20,6 +20,8 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { getProbList } from "../../../actions/interviewee/problemList";
+import { checkAdmin, checkStatus } from "../../../actions/interviewee/auth";
+import { Link, useLocation } from "react-router-dom";
 import { LinearProgress } from "@mui/material";
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -79,6 +81,7 @@ function TablePaginationActions(props: TablePaginationActionsProps) {
     onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
   };
 
+  
   return (
     <Box sx={{ flexShrink: 0, ml: 2.5 }}>
       <IconButton
@@ -130,6 +133,7 @@ const rows = [
 const ProblemList = (props) => {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [status,setStatus]=useState(false)
 
   const handleChangePage = (
     event: React.MouseEvent<HTMLButtonElement> | null,
@@ -166,8 +170,18 @@ const ProblemList = (props) => {
     props.fetchProblems()
     console.log(props.probs)
     console.log("rows", rows)
+    fetchStatus()
 
   }, [])
+
+  const fetchStatus=async()=>{
+
+    const res=await checkAdmin()
+    console.log(res)
+    setStatus(res)
+    
+          }
+    
 
   return (
     <>
@@ -201,12 +215,32 @@ const ProblemList = (props) => {
 
                 )?.map((row) => (
                   <StyledTableRow key={row.title} align="left">
-                  <StyledTableCell align="left" component="th" scope="row">
+                    {
+                      status?(
+                        <StyledTableCell align="left" component="th" scope="row">
+                   
+                       <Link to="/create" state={row}> Edit </Link>  
+
                     
-                        <DoneIcon color="primary"/>
+                    
+
                     
                 
                   </StyledTableCell>
+                      ):(
+<StyledTableCell align="left" component="th" scope="row">
+                   
+                   <DoneIcon color="primary"/>
+
+               
+               
+
+               
+           
+             </StyledTableCell>
+                      )
+}
+                  
                   <StyledTableCell  align="left" onClick={()=>redirectProb(row.problem_id)}>{row.title}
                     {
                         row.isPremium?<WorkspacePremiumIcon color="primary"/>:null

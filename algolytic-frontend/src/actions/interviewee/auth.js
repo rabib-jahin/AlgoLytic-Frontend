@@ -11,6 +11,19 @@ let loader=false;
 export const checkAuth=()=>{
     return !(cookies.get('token')==undefined || cookies.get('token')==null)
 }
+
+export const checkAdmin=async()=>{
+    let base_url=getApiUrl();
+    if(!(cookies.get('token')==undefined || cookies.get('token')==null)){
+        var res=await axios.get(base_url+'/auth/checkadmin',{headers:{authorization:'Bearer '+cookies.get('token')}}).catch(e=>console.log(e))
+ console.log(res?.data)
+        return res?.data
+    }
+   
+    return false
+}
+
+
 export const checkStatus=async()=>{
     let base_url=getApiUrl();
     if(!(cookies.get('token')==undefined || cookies.get('token')==null)){
@@ -20,6 +33,7 @@ export const checkStatus=async()=>{
    
     return {status:false,id:0}
 }
+
 export const checkLoading=()=>{
     return loader
 }
