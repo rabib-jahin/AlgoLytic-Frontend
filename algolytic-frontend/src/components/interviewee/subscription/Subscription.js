@@ -1,8 +1,12 @@
 import React, { useState,useEffect } from "react";
-import { getSubList} from "../../../actions/interviewee/subscription";
+import { getSubList, subscribe} from "../../../actions/interviewee/subscription";
 import './subscription.css';
 import { checkStatus } from "../../../actions/interviewee/auth";
 const Subscription= (props) => {
+
+
+    const [pending,setPending]=useState(false)
+
     const [data,setData]=useState([])
     const [status,setStatus]=useState({})
    
@@ -14,9 +18,9 @@ const Subscription= (props) => {
       }
       const fetchStatus=async()=>{
 
-const res=await checkStatus()
-console.log(res)
-setStatus(res)
+        const res=await checkStatus()
+        console.log(res)
+        setStatus(res)
 
       }
     useEffect(()=>{
@@ -25,6 +29,18 @@ setStatus(res)
  fetchStatus()
        
       },[])
+
+      const getPlan=async id=>{
+
+        setPending(true)
+        var res=await subscribe(id)
+        setPending(false)
+        window.location=res.data
+        console.log(res)
+        //console.log(id)
+      }
+
+
     return (
         <div >
 
@@ -58,15 +74,15 @@ setStatus(res)
                                 <li><i class="fa fa-check" aria-hidden="true"></i>No live Support</li>
                                 <li><i class="fa fa-check" aria-hidden="true"></i>Solutions  of others are not visible </li>
                                 </>: sub.title=="Premium"?<>
-  <li><i class="fa fa-check" aria-hidden="true"></i>Premium Problems Unlocked</li>
-  <li><i class="fa fa-check" aria-hidden="true"></i>24/7 Live Support</li> <br/>  
-  <li><i class="fa fa-check" aria-hidden="true"></i>All solutions are unlocked </li>
-</>:(
-<>
-<li><i class="fa fa-check" aria-hidden="true"></i>Premium Problems Unlocked</li>
-<li><i class="fa fa-check" aria-hidden="true"></i>24/7 Live Support</li> <br/>   
-<li><i class="fa fa-check" aria-hidden="true"></i>All solutions are unlocked </li>
-</>
+                                <li><i class="fa fa-check" aria-hidden="true"></i>Premium Problems Unlocked</li>
+                                <li><i class="fa fa-check" aria-hidden="true"></i>24/7 Live Support</li> <br/>  
+                                <li><i class="fa fa-check" aria-hidden="true"></i>All solutions are unlocked </li>
+                              </>:(
+                              <>
+                              <li><i class="fa fa-check" aria-hidden="true"></i>Premium Problems Unlocked</li>
+                              <li><i class="fa fa-check" aria-hidden="true"></i>24/7 Live Support</li> <br/>   
+                              <li><i class="fa fa-check" aria-hidden="true"></i>All solutions are unlocked </li>
+                              </>
 
 
 
@@ -75,7 +91,9 @@ setStatus(res)
                  
                         </ul>
                       </div>
-                      <a href="#" style={{cursor:"pointer"}}>{status.id===sub.id && sub.id!=1?"Cancel Now":"Buy now"}</a>
+                      {status.id!==sub.id&&<a style={{cursor:"pointer"}} onClick={()=>{
+                        if(!pending) getPlan(sub.id)
+                        }}>{pending?'...':'Get Plan'}</a>}
                     </div>
                   </div>
             
