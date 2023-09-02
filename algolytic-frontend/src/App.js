@@ -13,6 +13,8 @@ import ProblemCreate from "./components/interviewee/problempool/ProblemCreate"
 import Subscription from "./components/interviewee/subscription/Subscription";
 import Runner from "./components/interviewee/Runner"
 import PostPayment from "./components/interviewee/PostPayment";
+import Mocktest from "./components/interviewee/Mocktest/Mocktest";
+import SingleTest from "./components/interviewee/Mocktest/SingleTest";
 
 var showToast, getApiUrl;
 
@@ -93,6 +95,19 @@ function App() {
             path="/create"
             exact
             element={<ProblemCreate />}
+
+          />
+           <Route
+            path="/tests"
+            exact
+            element={<Mocktest />}
+
+          />
+
+<Route
+            path="/test/:id"
+            exact
+            element={<SingleTest />}
 
           />
         </Routes>
