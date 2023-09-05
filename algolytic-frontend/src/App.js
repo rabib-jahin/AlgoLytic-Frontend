@@ -15,6 +15,8 @@ import Runner from "./components/interviewee/Runner"
 import PostPayment from "./components/interviewee/PostPayment";
 import Mocktest from "./components/interviewee/Mocktest/Mocktest";
 import SingleTest from "./components/interviewee/Mocktest/SingleTest";
+import Dummy from "./components/interviewee/Mocktest/Dummy";
+import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
 
 var showToast, getApiUrl;
 
@@ -102,9 +104,9 @@ function App() {
             exact
             element={<Mocktest />}
 
-          />
+          />          
 
-<Route
+          <Route
             path="/test/:id"
             exact
             element={<SingleTest />}
