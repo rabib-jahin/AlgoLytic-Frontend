@@ -157,7 +157,7 @@ else if (password !== repass)
           className={    window.sessionStorage.getItem("option") === "problems" ? "active":""}
           onClick={() => handleOptionClick("problems")}
         >
-          <a href="/">Problems</a>
+          <a href="/problempool">Problems</a>
         </li>
         <li
           className={window.sessionStorage.getItem("option")  === "learn" ? "active" : ""}

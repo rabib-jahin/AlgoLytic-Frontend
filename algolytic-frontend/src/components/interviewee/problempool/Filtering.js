@@ -169,12 +169,7 @@ const Filtering = (props) => {
         <input onChange={(e) => setText(e.target.value)} type="text" placeholder="Search..." className="searchbar-input" />
         <button onClick={search} className="searchbar-button"><SearchIcon /></button>
       </div>
-      <TextField inputRef={acRef}   InputLabelProps={{
-        style: { color: 'white' },
-      }} fullWidth sx={{ input: { color: 'white' } }} id="outlined-basic" label="Acceptance" variant="outlined"  />
-      <TextField inputRef={actypeRef}   InputLabelProps={{
-        style: { color: 'white' },
-      }} fullWidth sx={{ input: { color: 'white' } }} id="outlined-basic" label="Actype" variant="outlined"  />
+      
     </div>
   );
 }

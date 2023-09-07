@@ -15,6 +15,7 @@ import Runner from "./components/interviewee/Runner"
 import PostPayment from "./components/interviewee/PostPayment";
 import Mocktest from "./components/interviewee/Mocktest/Mocktest";
 import SingleTest from "./components/interviewee/Mocktest/SingleTest";
+import Home from "./components/interviewee/home";
 import Dummy from "./components/interviewee/Mocktest/Dummy";
 import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
 
@@ -52,7 +53,8 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" exact element={<MainProblemPoolContainer />} />
+          <Route path="/" exact element={<Home />} />
+          <Route path="/problempool" exact element={<MainProblemPoolContainer />} />
           <Route
             path="/user-progress"
             exact
@@ -102,7 +104,7 @@ function App() {
            <Route
             path="/tests"
             exact
-            element={<Mocktest />}
+            element={<Mocktest />}            
 
           />          
 
