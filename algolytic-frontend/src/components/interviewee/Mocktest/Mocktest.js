@@ -13,6 +13,9 @@ import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
+import Autocomplete from '@mui/material/Autocomplete';
+import Stack from '@mui/material/Stack';
+import TextField from '@mui/material/TextField';
 import { getTagList } from "../../../actions/interviewee/tagList";
 
 const BootstrapDialog = styled(Dialog)(({ theme }) => ({
@@ -78,69 +81,52 @@ const filter = (item, name, idx) => {
 if(item!=undefined){
   let to = name.toLowerCase()
   var elem = document.getElementById("btn" + idx)
-  elem.innerText = item
-  
-
-  // let d = {}
-  // if (to !== "premium")
-  //   props.body[to] = item;
-  // if (to == "difficulty") {
-  //   d = { ...props.body, difficulty: item.toLowerCase() }
-  //   props.setBody(d);
+  elem.innerText = item  
 
 
-  // }
-  // if (to === "status") {
-  //   d = { ...props.body, status: item }
-  //   props.setBody(d);
-
-
-  // }
-  // if (to === "premium") {
-
-  //   if (item == "Regular") {
-  //     d = { ...props.body, isPremium: 0 }
-  //     props.setBody(d);
-
-
-  //   }
-  //   else {
-  //     d = { ...props.body, isPremium: 1 }
-  //     props.setBody(d);
-
-  //   }
-  // }
-  // if (to == "tag") {
-  //   d = { ...props.body, tag: item.toLowerCase() }
-  //   props.setBody(d);
-
-  // }
-
-  // console.log(d)
 }
 
 }
-    const handleClick = () => {
-      setOpen(true);
-     
-    };
-    const handleClose = () => {
-      setOpen(false);
-    };
+ 
+  const [values, setValues] = React.useState([]);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleCreate = async() => {
+    let a=[]
+    values.length>0 && values.forEach(val=>{
+    
+      a.push(val.name)
+    })
+      
+    // var res=await recommend({to:a,problem_id:props.id})
+    
+    // console.log(res.data)
+    // showToast("Successfully Recommended ")
+    
+    console.log(a)
+    window.location.href = "/test/1"
+  };
+
  
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
     
 return (
         <div class="container">
 
-<h3 class="test">Test Formats</h3>
-  <div class="cards" onClick={handleClick}>
+<h2 class="test">Test Formats</h2>
+  <div class="cards" onClick={handleClickOpen}>
     <div class="card-item">
       <div class="card-image">
       </div>
       <div class="card-info">
-        <h2 class="card-title">Exploring around</h2>
-        <p class="card-intro">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+        <h2 class="card-title">Coding interview Mocktest</h2>
+        <p class="card-intro">Test yourself with topics of your own choice. Problems will be selected based on your performance so far</p>
       </div>
     </div>
   </div>
@@ -158,7 +144,7 @@ return (
         open={open}
       >
         <DialogTitle sx={{ m: 0, p: 2 }} id="customized-dialog-title">
-          Modal title
+          Select your topics
         </DialogTitle>
         <IconButton
           aria-label="close"
@@ -174,58 +160,65 @@ return (
         </IconButton>
         <DialogContent dividers>
           
-          {/* <div className="dropdown-content" style={{ marginLeft: index == 3 ? "-2px" : index == 1 ? "-8px" : null, position: 'absolute', top: '100%' }}>
-              {button.items?.map((item, itemIndex) => (
-                <div onClick={() => filter(item.name, button.name, index)} key={itemIndex} className="dropdown-item text-green2">
-                  {item.name}
-                </div>
-              ))}
-            </div> */}
-  <div className="middle" style={{ marginLeft: "10px" }}>
-      {buttons.length>0 && buttons.map((button, index) => (
-        <div key={index} style={{ marginRight: index < buttons.length - 1 ? '50px' : 0, position: 'relative' }}>
-          <div style={{ display: "flex" }}>
-            <button
-              className="rounded-button"
-              id={"btn" + index}
-              style={{ marginLeft: index == 3 ? "10px" : index == 2 ? "28px" : null }}
+        
+        </DialogContent>        
+        <DialogContent>
+          
+          
+          { tags!=undefined && tags.length>0  ?
+          
+          <Stack spacing={3}   sx={{ width: 500, color:'black' }}>
+          <Autocomplete
+          
+            multiple
+            id="tags-standard"
+            options={tags}
+            getOptionLabel={(option) => option.name}
+            defaultValue={[tags[0]]}
 
-            >
-              {button.name}
+            renderOption={(props, option) => {
+              const { name } = option;
+              return (
+                <span {...props} style={{ color:'#222222',fontWeight:'bold' }}>
+                  {name}
+                </span>
+              );
+            }}
 
-            </button>
-            {showDropdown[index] ? <KeyboardArrowUpIcon onClick={() => toggleDropdown(index)} className="rounded-button" style={{ marginLeft: "15px" }} /> : <KeyboardArrowDownIcon onClick={() => toggleDropdown(index)} className="rounded-button" style={{ marginLeft: "15px" }} />}
-          </div>
-          {showDropdown[index] && button.name !== "Tag" && (
-            <div className="dropdown-content" style={{ marginLeft: index == 3 ? "-2px" : index == 1 ? "-8px" : null, position: 'absolute', top: '100%' }}>
-              {button.items.map((item, itemIndex) => (
-                <div onClick={() => filter(item, button?.name, index)}   key={itemIndex} className="dropdown-item text-green2">
-                  {item}
-                </div>
-              ))}
-            </div>
-          )}
-          {showDropdown[index] && button.name == "Tag" && (
-
-            <div className="dropdown-content" style={{ marginLeft: index == 3 ? "-2px" : index == 1 ? "-8px" : null, position: 'absolute', top: '100%' }}>
-              {button.items?.map((item, itemIndex) => (
-                <div onClick={() => filter(item?.name, button?.name, index)} key={itemIndex} className="dropdown-item text-green2">
-                  {item.name}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-      
-      
-    </div>
-
+            renderInput={(params) => (
+              <TextField
+          
+           
+                {...params}
+                variant="standard"
+                label="Multiple values"
+                placeholder="Favorites"
+               
+               
+              
+              />
+            )}
+            onChange={(e, value, situation, option) => {
+             
+  
+               //write your code here
+               setValues(value)
+              
+            
+            }}
+          />
+         
+        </Stack>
+          
+          
+          :null}
+          
+          
+           
         </DialogContent>
         <DialogActions>
-          <Button autoFocus onClick={handleClose}>
-          Create
-          </Button>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleCreate}>Start Test</Button>
         </DialogActions>
       </BootstrapDialog>
 </div>

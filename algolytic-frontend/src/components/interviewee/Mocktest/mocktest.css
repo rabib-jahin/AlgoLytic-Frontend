@@ -84,3 +84,8 @@
     .text{
       width: 454px;
     }
+
+    .submit{
+      margin-left: 1000px;
+      margin-bottom: -70px;
+    }
