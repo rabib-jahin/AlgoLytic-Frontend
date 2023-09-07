@@ -39,11 +39,13 @@ const Description = (props) => {
     setData(res.data)
     console.log("nn", res.data)
   }
+
   useEffect(() => {
 
     fetchProblems(props.id)
 
   }, [])
+  
   return (
     <div className="description" style={{ color: "white", marginLeft: "20px" }}>
       <div style={{ display: "flex" }}> <h3>{Object.keys(data).length == 0 ? "" : data?.isPremium == 0 || props.status ? data?.title : ""}</h3> <h4 style={{ color: "green", marginLeft: "20px" }}>{Object.keys(data).length == 0 ? "" : data?.isPremium == 0 || props.status ? data?.tag : ""}</h4></div>
