@@ -15,7 +15,7 @@ import Runner from "./components/interviewee/Runner"
 import PostPayment from "./components/interviewee/PostPayment";
 import Mocktest from "./components/interviewee/Mocktest/Mocktest";
 import SingleTest from "./components/interviewee/Mocktest/SingleTest";
-import Home from "./components/interviewee/home";
+import Home from "./components/interviewee/Home";
 import Dummy from "./components/interviewee/Mocktest/Dummy";
 import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
 
