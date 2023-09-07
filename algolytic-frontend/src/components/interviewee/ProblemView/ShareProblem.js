@@ -163,19 +163,8 @@ console.log(a)
        {/* overlayStyle={{ borderRadius: 16, borderWidth: 1, backgroundColor: 'lightblue', borderColor: 'gold' }} */}
         <DialogTitle>Share Problem</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-           
-          </DialogContentText>
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Add user"
-            type="Name"
-            fullWidth
-            variant="standard"
-            
-          /> */}
+          
+          
           { users!=undefined && users.length>0  ?
           
           <Stack spacing={3}   sx={{ width: 500, color:'black' }}>
