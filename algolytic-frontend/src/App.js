@@ -1,10 +1,9 @@
 import NavBar from "./components/interviewee/navbar/Navbar";
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 import { ToastContainer, toast as oldToast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainProblemPoolContainer from "./components/interviewee/problempool/MainProblemPoolContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { devApi, prodApi } from "./config";
 import UserProgressContainer from "./components/interviewee/UserProgress/UserProgressContainer";
 import ProblemView from "./components/interviewee/ProblemView/ProblemView";
 
@@ -19,7 +18,6 @@ import SingleTest from "./components/interviewee/Mocktest/SingleTest";
 import Home from "./components/interviewee/home";
 import Dummy from "./components/interviewee/Mocktest/Dummy";
 import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
-import { useNavigate} from "react-router-dom";
 
 var showToast, getApiUrl;
 
@@ -27,21 +25,13 @@ var showToast, getApiUrl;
 function App() {
 
   
-  const navigate=useNavigate()
 
-  const [serial,setSerial]=useState(1)
 
- useEffect(()=>{
-
-console.log(serial)
-
- },[serial])
+  
 
 
   getApiUrl = () => {
-    var env = process.env.NODE_ENV;
-    if (env === "development") return devApi;
-    return prodApi;
+    return process.env.REACT_APP_BACKEND_API;
   };
 
   showToast = (message) => {
@@ -58,7 +48,7 @@ console.log(serial)
 
   return (
     <>
-   
+      <BrowserRouter>
         <NavBar />
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -71,13 +61,7 @@ console.log(serial)
               <Route
             path="/problem/:id"
             exact
-            element={<ProblemView navigate={navigate}  setSerial={setSerial} serial={serial} isTest={false}/>}
-          />
-
-<Route
-            path="/test/problem/:id"
-            exact
-            element={<ProblemView navigate={navigate}  setSerial={setSerial} serial={serial} isTest={true}/>}
+            element={<ProblemView  />}
           />
 
 
@@ -137,7 +121,7 @@ console.log(serial)
 
           />
         </Routes>
-     
+      </BrowserRouter>
       <ToastContainer />
     </>
   );
