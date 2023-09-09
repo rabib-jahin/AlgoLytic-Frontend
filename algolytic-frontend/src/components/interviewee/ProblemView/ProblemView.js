@@ -14,7 +14,7 @@ import "../../../assets/css/interviewee/problemview/test.css";
 import InputOutput from "./InputOutput";
 import SubmitCode from "./SubmitCode";
 import Submission from "./Submission";
-
+import LeaderBoard from "./Leaderboard";
 
 import ShareProblem from "./ShareProblem";
 
@@ -159,12 +159,12 @@ fetchUsers()
                                     }
                                 })
                             }{
-                              props.serial=== JSON.parse(window.sessionStorage.getItem("tests")).length?(
+                              props.serial=== JSON.parse(window.sessionStorage.getItem("tests")).length+1?(
                                 <div className={`step-current`}>
                               Home
                             </div>
 
-                              ): <div className={`step-pending `} onClick={()=>{props.setSerial(JSON.parse(window.sessionStorage.getItem("tests")).length);props.navigate("/test/"+   window.sessionStorage.getItem("test_id"));}}>
+                              ): <div className={`step-pending `} onClick={()=>{props.setSerial(JSON.parse(window.sessionStorage.getItem("tests")).length+1);props.navigate("/test/"+   window.sessionStorage.getItem("test_id"));props.navigate(0)}}>
                               Home
                           </div>
                             }
@@ -184,6 +184,9 @@ fetchUsers()
           <h4 className="heading" onClick={() => handleTabClick("submission")}>
             Submission
           </h4>
+          <h4 className="heading" onClick={() => handleTabClick("leaderboard")}>
+              LeaderBoard
+            </h4>
           
           </>}
          
@@ -208,6 +211,13 @@ fetchUsers()
             <div className="solution">
               <Solution id={id} status={status}/>
             </div>
+          ): tab === "leaderboard" ? (
+            <div className="discussion">
+              <LeaderBoard id={id}/>
+            </div>
+          
+          
+          
           ) : (
             <div className="submission">
               <Submission id={id}/>

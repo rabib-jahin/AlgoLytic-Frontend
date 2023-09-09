@@ -1,24 +1,129 @@
 .submission{
 
+    /* background: white; */
     color:white;
 }
+
+.accepted{
+    color:green;
+    margin-left: 110px;
+    margin-top: 3.5%;   
+
+}
+
+.verdict{
+    color:rgb(204, 219, 226);
+    margin-left: 110px;
+    margin-top: 3.5%;
+    font-weight: bold;   
+
+}
+
+.lanheader{
+    color:rgb(204, 219, 226);
+    margin-left: 38%;
+    margin-top: 3.5%;
+    font-weight: bold;   
+
+}
+
 .err{
     color:red;
+    margin-left: 110px;
+    margin-top: 3.5%;
+}
+
+
+.lanac{
+
+    color: rgb(192, 192, 247);
+    margin: 48px;
+    margin-left: 40%;
+    margin-top: 3%;
+  
+}
+
+.lanwa{
+
+    color: rgb(192, 192, 247);
+    margin: 48px;
+    margin-left: 38.2%;
+    margin-top: 3%;
+  
+}
+
+.time{
+
+    color: rgb(192, 192, 247);
+    margin: 48px;
+    margin-left: 12%;
+    margin-top: 3%;
+  
+}
+.cpu{
+
+    color: rgb(192, 192, 247);
+    margin: 48px;
+    margin-left: 9%;
+    margin-top: 3%;
+  
+}
+
+.memory{
+
+    color: rgb(192, 192, 247);
+    margin: 48px;
+    margin-left: 10%;
+    margin-top: 3%;
+  
+}
+.userid{
+    color:white;
     margin-left: 47px;
-    margin-top: 31px;
+    margin-top: 3.5%;   
+
 }
 .lang{
 
     color: rgb(192, 192, 247);
     margin: 48px;
-    margin-left: 56%;
+    margin-left: 30%;
     margin-top: 3%;
   
 }
-.accepted{
-    color:green;
-    margin-left: 47px;
-    margin-top: 20px;
-    
 
+.cpua{
+
+    color: rgb(192, 192, 247);
+    margin: 48px;
+    margin-left: 9%;
+    margin-top: 3%;
+    font-weight: bold;
+  
+}
+
+.memorya{
+
+    color: rgb(192, 192, 247);
+    margin: 48px;
+    margin-left: 10%;
+    margin-top: 3%;
+    font-weight: bold;
+  
+}
+.userida{
+    color:white;
+    margin-left: 47px;
+    margin-top: 3.5%;  
+    font-weight: bold; 
+
+}
+.langa{
+
+    color: rgb(192, 192, 247);
+    margin: 48px;
+    margin-left: 30%;
+    margin-top: 3%;
+    font-weight: bold;
+  
 }
