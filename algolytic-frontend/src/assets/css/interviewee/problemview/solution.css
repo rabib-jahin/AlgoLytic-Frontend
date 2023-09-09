@@ -6,8 +6,7 @@ color:white;
 
 }
 .inner{
-
-
+    overflow-y:scroll;
     height: 29em;
     width: 92%;
     margin-left: 4%;

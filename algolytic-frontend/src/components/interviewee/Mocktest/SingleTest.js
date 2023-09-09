@@ -314,12 +314,19 @@ console.log(d)
   
                   )?.map((row) => (
                     <StyledTableRow key={row.title} align="left">
-                    <StyledTableCell align="left" component="th" scope="row">
+
+                      {row.state==="solved"?<StyledTableCell align="left" component="th" scope="row">
                       
-                          <DoneIcon color="primary"/>
-                      
+                      <DoneIcon color="primary"/>
                   
-                    </StyledTableCell>
+              
+                </StyledTableCell>:(<StyledTableCell align="left" component="th" scope="row">
+                      
+                      <RemoveCircleIcon color="red"/>
+                  
+              
+                </StyledTableCell>)}
+                    
                     <StyledTableCell  align="left" onClick={()=>redirectProb(row.prob.problem_id)}>{row.prob.title}
                       {
                           row.prob.IconButtonisPremium?<WorkspacePremiumIcon color="primary"/>:null

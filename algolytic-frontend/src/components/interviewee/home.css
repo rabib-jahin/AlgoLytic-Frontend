@@ -117,8 +117,17 @@
     margin: var(--card-margin);
    background-color:#1c1d20;
       background: linear-gradient(-45deg, #1c1d20, #929292,);
+      cursor:pointer;
+
   }
-  
+  .card-home:hover {
+    box-shadow: 0px 1px 2px 0px var(--card-shadow);
+    border-radius: 4px;
+    margin: var(--card-margin);
+   background-color:#1c1d20;
+      background: linear-gradient(-45deg, #1c1d20, #929292,);
+      cursor:pointer;
+  }
   .card-home .material-icons {
     font-size: 4.8rem;
   }
