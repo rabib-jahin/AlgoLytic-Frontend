@@ -1,0 +1,21 @@
+version: 0.2
+
+env:
+  variables:
+    REACT_APP_BACKEND_API: https://bsj598t5n8.execute-api.ca-central-1.amazonaws.com/algolytic/api/v1.0.0
+
+phases:
+  pre_build:
+    commands:
+      - cd algolytic-frontend
+      - npm install --force
+  build:
+    commands:
+      - cd algolytic-frontend
+      - npm run build
+
+artifacts:
+  files:
+    - '**/*'
+  discard-paths: no
+  base-directory: algolytic-frontend/build
