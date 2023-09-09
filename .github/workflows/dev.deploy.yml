@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: self-hosted
     env:
-      REACT_APP_BACKEND_API: http://43.224.110.132/api/v1.0.0
+      REACT_APP_BACKEND_API_UPDATED: https://dev.algolytic.pro/api/v1.0.0
 
     steps:
       - name: Checkout code
@@ -21,4 +21,4 @@ jobs:
           cd algolytic-frontend
           npm i
           npm run build
-          cp -r ./build/* /var/www/html
+          cp -r ./build/* /var/www/dev.algolytic.pro

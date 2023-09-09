@@ -1,5 +1,5 @@
 import NavBar from "./components/interviewee/navbar/Navbar";
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ToastContainer, toast as oldToast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainProblemPoolContainer from "./components/interviewee/problempool/MainProblemPoolContainer";
@@ -19,28 +19,28 @@ import SingleTest from "./components/interviewee/Mocktest/SingleTest";
 import Home from "./components/interviewee/home";
 import Dummy from "./components/interviewee/Mocktest/Dummy";
 import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
-import { useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 var showToast, getApiUrl;
 
 
 function App() {
 
-  
-  const navigate=useNavigate()
 
-  const [serial,setSerial]=useState(1)
+  const navigate = useNavigate()
 
- useEffect(()=>{
+  const [serial, setSerial] = useState(1)
 
-console.log(serial)
+  useEffect(() => {
 
- },[serial])
+    console.log(serial)
+
+  }, [serial])
 
 
   getApiUrl = () => {
-   return process.env.REACT_APP_BACKEND_API
-  };
+    return process.env.REACT_APP_BACKEND_API_UPDATED;
+  }
 
   showToast = (message) => {
     oldToast.dark(message, {
@@ -54,90 +54,88 @@ console.log(serial)
     });
   };
 
-  //dummy comment for deployment
-
   return (
     <>
-   
-        <NavBar />
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/problempool" exact element={<MainProblemPoolContainer />} />
-          <Route
-            path="/user-progress"
-            exact
-            element={<UserProgressContainer/>}
-          />
-              <Route
-            path="/problem/:id"
-            exact
-            element={<ProblemView navigate={navigate}  setSerial={setSerial} serial={serial} isTest={false}/>}
-          />
 
-<Route
-            path="/test/problem/:id"
-            exact
-            element={<ProblemView navigate={navigate}  setSerial={setSerial} serial={serial} isTest={true}/>}
-          />
-
-
-              <Route
-            path="Recommendation"
-            exact
-            element={<Recommendation />}
-
-            />
-
-          <Route
-            path="/subscription"
-            exact
-            element={<Subscription />}
-          />
+      <NavBar />
+      <Routes>
+        <Route path="/" exact element={<Home />} />
+        <Route path="/problempool" exact element={<MainProblemPoolContainer />} />
+        <Route
+          path="/user-progress"
+          exact
+          element={<UserProgressContainer />}
+        />
+        <Route
+          path="/problem/:id"
+          exact
+          element={<ProblemView navigate={navigate} setSerial={setSerial} serial={serial} isTest={false} />}
+        />
 
         <Route
-            path="/post-payment/:status"
-            exact
-            element={<PostPayment />}
-          />
-       
+          path="/test/problem/:id"
+          exact
+          element={<ProblemView navigate={navigate} setSerial={setSerial} serial={serial} isTest={true} />}
+        />
+
 
         <Route
-            path="/run"
-            exact
-            element={<Runner />}
+          path="Recommendation"
+          exact
+          element={<Recommendation />}
 
-          />
-
-          
-        <Route
-            path="/create"
-            exact
-            element={<ProblemCreate />}
-
-          />
+        />
 
         <Route
-            path="/monitor"
-            exact
-            element={<Architecture />}
+          path="/subscription"
+          exact
+          element={<Subscription />}
+        />
 
-            />
-        
         <Route
-            path="/tests"
-            exact
-            element={<Mocktest />}            
+          path="/post-payment/:status"
+          exact
+          element={<PostPayment />}
+        />
 
-          />          
 
-          <Route
-            path="/test/:id"
-            exact
-            element={<SingleTest />}
+        <Route
+          path="/run"
+          exact
+          element={<Runner />}
 
-          />
-        </Routes>
-     
+        />
+
+
+        <Route
+          path="/create"
+          exact
+          element={<ProblemCreate />}
+
+        />
+
+        <Route
+          path="/monitor"
+          exact
+          element={<Architecture />}
+
+        />
+
+        <Route
+          path="/tests"
+          exact
+          element={<Mocktest />}
+
+        />
+
+        <Route
+          path="/test/:id"
+          exact
+          element={<SingleTest />}
+
+        />
+      </Routes>
+
       <ToastContainer />
     </>
   );
