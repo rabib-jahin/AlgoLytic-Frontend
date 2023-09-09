@@ -37,7 +37,21 @@ export const getSubmissions=async (id)=>{
     }
     else
     return null
+}
 
+export const getLeaderboard=async (id)=>{
+  let base_url=getApiUrl();
+  //console.log(base_url+"/tag/list")
 
+  var res=await axios.get(base_url+"/problem/leaderboard/"+id,{headers:{authorization:'Bearer '+cookies.get('token')}})
+  .catch(error => {
+    console.log(error);
+    
+  });
 
+  if(res){
+    return res.data
+  }
+  else
+  return null
 }
