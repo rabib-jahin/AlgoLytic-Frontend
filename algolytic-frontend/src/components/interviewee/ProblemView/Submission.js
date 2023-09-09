@@ -57,7 +57,7 @@ const Submission = (props) => {
 
                 {
 
-                    data.length === 0 ? <h1>No Sumbissions</h1> : (
+                    data.length === 0 ? <h1>No Submissions</h1> : (
 
 
                         data && data.map((d, idx) => {

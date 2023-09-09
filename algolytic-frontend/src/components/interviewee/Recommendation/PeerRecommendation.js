@@ -149,7 +149,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
                     
                     <StyledTableRow key={row.peer_id} align="left">
 
-                    <StyledTableCell align="left">{row.from}</StyledTableCell>
+                    <StyledTableCell align="left">{row.from_name}</StyledTableCell>
 
                     <StyledTableCell align="left" component="th" scope="row">
                       

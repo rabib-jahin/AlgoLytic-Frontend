@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef } from "react";
 import "../../../assets/css/interviewee/problempool/filtering.css";
 import { ArrowDownward } from '@mui/icons-material';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -6,6 +6,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import SearchIcon from '@mui/icons-material/Search';
 import Button from '@mui/material/Button';
 import { getTagList } from "../../../actions/interviewee/tagList";
+import TextField from '@mui/material/TextField';
 
 const Filtering = (props) => {
 
@@ -14,6 +15,8 @@ const Filtering = (props) => {
   const [text, setText] = useState("");
   const [tags, setTags] = useState([])
   const [data, setData] = useState({})
+  const acRef=useRef();
+  const actypeRef=useRef();
 
   // array of objects for each button with its name and dropdown items
   const buttons = [
@@ -91,11 +94,20 @@ const Filtering = (props) => {
 
     }
 
+    d = { ...props.body, ac: acRef.current.value }
+    props.setBody(d);
+    d = { ...props.body, actype: actypeRef.current.value }
+    props.setBody(d);
+
     console.log(d)
 
 
   }
   const filterfun = () => {
+
+   
+    console.log(acRef.current.value)
+    console.log(actypeRef.current.value)
     props.fetchProblems()
     props.setBody({})
   }
@@ -157,6 +169,7 @@ const Filtering = (props) => {
         <input onChange={(e) => setText(e.target.value)} type="text" placeholder="Search..." className="searchbar-input" />
         <button onClick={search} className="searchbar-button"><SearchIcon /></button>
       </div>
+      
     </div>
   );
 }

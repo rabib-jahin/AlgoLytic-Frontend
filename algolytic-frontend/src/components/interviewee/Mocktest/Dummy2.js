@@ -50,51 +50,7 @@ console.log(data)
           
           }}
         />
-        {/* <Autocomplete
-          multiple
-          id="tags-outlined"
-          options={top100Films}
-          getOptionLabel={(option) => option.title}
-          defaultValue={[top100Films[1]]}
-          filterSelectedOptions
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="filterSelectedOptions"
-              placeholder="Favorites"
-            />
-          )}
-        />
-        <Autocomplete
-          multiple
-          id="tags-filled"
-          options={top100Films.map((option) => option.title)}
-          defaultValue={[top100Films[1].title]}
-          freeSolo
-          renderTags={(value, getTagProps) =>
-            value.map((option, index) => (
-              <Chip variant="outlined" label={option} {...getTagProps({ index })} />
-            ))
-          }
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              variant="filled"
-              label="freeSolo"
-              placeholder="Favorites"
-            />
-          )}
-        />
-        <Autocomplete
-          multiple
-          id="tags-readOnly"
-          options={top100Films.map((option) => option.title)}
-          defaultValue={[top100Films[1].title, top100Films[1].title]}
-          readOnly
-          renderInput={(params) => (
-            <TextField {...params} label="readOnly" placeholder="Favorites" />
-          )}
-        /> */}
+        
       </Stack>
     );
   }
@@ -117,7 +73,7 @@ console.log(data)
   ];
   
 
-const ShareProblem= (props) =>  {
+const Dummy2= (props) =>  {
   const [open, setOpen] = React.useState(false);
   const [users, setUsers] = React.useState([]);
   const [values, setValues] = React.useState([]);
@@ -131,10 +87,11 @@ values.length>0 && values.forEach(val=>{
 
   a.push(val.id)
 })
-  
-var res=await recommend({to:a,problem_id:props.id})
 
-console.log(res.data)
+
+// var res=await recommend({to:a,problem_id:props.id})
+
+// console.log(res.data)
 showToast("Successfully Recommended ")
 
 console.log(a)
@@ -145,14 +102,14 @@ console.log(a)
   };
   React.useEffect(()=>{
 
-  
-    setUsers(props.users)
+    var res=["aaaaaa","bbbbbbbbbb","ccccc"]
+    setUsers(res)
     
     console.log("users",users)
     
     
     
-    },[props.users])
+    },[])
 
   return (
     <div>
@@ -163,8 +120,10 @@ console.log(a)
        {/* overlayStyle={{ borderRadius: 16, borderWidth: 1, backgroundColor: 'lightblue', borderColor: 'gold' }} */}
         <DialogTitle>Share Problem</DialogTitle>
         <DialogContent>
-          
-          
+          <DialogContentText>
+           
+          </DialogContentText>
+        
           { users!=undefined && users.length>0  ?
           
           <Stack spacing={3}   sx={{ width: 500, color:'black' }}>
@@ -173,7 +132,7 @@ console.log(a)
             multiple
             id="tags-standard"
             options={users}
-            getOptionLabel={(option) => option.login}
+            getOptionLabel={(option) => option}
             defaultValue={[users[0]]}
 
             renderOption={(props, option) => {
@@ -207,51 +166,7 @@ console.log(a)
             
             }}
           />
-          {/* <Autocomplete
-            multiple
-            id="tags-outlined"
-            options={top100Films}
-            getOptionLabel={(option) => option.title}
-            defaultValue={[top100Films[1]]}
-            filterSelectedOptions
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="filterSelectedOptions"
-                placeholder="Favorites"
-              />
-            )}
-          />
-          <Autocomplete
-            multiple
-            id="tags-filled"
-            options={top100Films.map((option) => option.title)}
-            defaultValue={[top100Films[1].title]}
-            freeSolo
-            renderTags={(value, getTagProps) =>
-              value.map((option, index) => (
-                <Chip variant="outlined" label={option} {...getTagProps({ index })} />
-              ))
-            }
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                variant="filled"
-                label="freeSolo"
-                placeholder="Favorites"
-              />
-            )}
-          />
-          <Autocomplete
-            multiple
-            id="tags-readOnly"
-            options={top100Films.map((option) => option.title)}
-            defaultValue={[top100Films[1].title, top100Films[1].title]}
-            readOnly
-            renderInput={(params) => (
-              <TextField {...params} label="readOnly" placeholder="Favorites" />
-            )}
-          /> */}
+         
         </Stack>
           
           
@@ -269,4 +184,4 @@ console.log(a)
   );
 }
 
-export default ShareProblem;
+export default Dummy2;
