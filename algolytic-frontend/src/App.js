@@ -24,14 +24,8 @@ var showToast, getApiUrl;
 
 function App() {
 
-  
-
-
-  
-
-
   getApiUrl = () => {
-    return process.env.REACT_APP_BACKEND_API;
+    return process.env.REACT_APP_BACKEND_API_UPDATED;
   };
 
   showToast = (message) => {
