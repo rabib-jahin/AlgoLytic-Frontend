@@ -13,6 +13,7 @@ import ProblemCreate from "./components/interviewee/problempool/ProblemCreate"
 import Subscription from "./components/interviewee/subscription/Subscription";
 import Runner from "./components/interviewee/Runner"
 import PostPayment from "./components/interviewee/PostPayment";
+import Architecture from "./components/Architecture";
 
 var showToast, getApiUrl;
 
@@ -93,6 +94,13 @@ function App() {
             path="/create"
             exact
             element={<ProblemCreate />}
+
+          />
+
+        <Route
+            path="/monitor"
+            exact
+            element={<Architecture />}
 
           />
         </Routes>
