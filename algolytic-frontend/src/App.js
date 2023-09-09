@@ -39,7 +39,7 @@ console.log(serial)
 
 
   getApiUrl = () => {
-   return "http://43.224.110.132/api/v1.0.0"
+   return process.env.REACT_APP_BACKEND_API
   };
 
   showToast = (message) => {
