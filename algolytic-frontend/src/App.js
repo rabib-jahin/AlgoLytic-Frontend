@@ -16,7 +16,7 @@ import PostPayment from "./components/interviewee/PostPayment";
 import Architecture from "./components/Architecture";
 import Mocktest from "./components/interviewee/Mocktest/Mocktest";
 import SingleTest from "./components/interviewee/Mocktest/SingleTest";
-import Home from "./components/interviewee/home";
+import Home from "./components/interviewee/Home";
 import Dummy from "./components/interviewee/Mocktest/Dummy";
 import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
 import { useNavigate} from "react-router-dom";

@@ -21,12 +21,13 @@ import DialogActions from '@mui/material/DialogActions';
 import CloseIcon from '@mui/icons-material/Close';
 import Typography from '@mui/material/Typography';
 import { getTagList } from "../../actions/interviewee/tagList";
+import { getPopularProblems } from "../../actions/interviewee/problemList";
 
 const Card2 = (props) => {
     return (
-      <li className="card-home">
+      <li className="card-home" onClick={()=>window.location.href="/problem/"+props.copy.problem_id} >
         <span class="material-icons">{props.icon}</span>
-        <p>{props.copy}</p>
+        <p>{props.copy.title}</p>
       </li>
     )
   }
@@ -72,7 +73,7 @@ const Home = (props) => {
     ];
     const [moveClass, setMoveClass] = useState('');
   const [carouselItems, setCarouselItems] = useState(items);
-  
+  const [probs, setProbs] = useState([]);
   useEffect(() => {
     document.documentElement.style.setProperty('--num', carouselItems.length);
   }, [carouselItems])
@@ -98,7 +99,16 @@ const Home = (props) => {
     setCarouselItems(copy);
   }
 
-    
+  const fetch=async()=>{
+
+var res=await getPopularProblems()
+console.log(res.data)
+setProbs(res.data)
+  }
+    useEffect(()=>{
+
+        fetch()
+    },[])
 return (
         <div >
               <div class="box-home2 offset-top-left-shadow" style={{fontSize:"18px"}}>Popular Problems</div>
@@ -113,8 +123,8 @@ return (
         </button>
       </div>
       <ul  style={{marginLeft:"39px"}} onAnimationEnd={handleAnimationEnd} className={`${moveClass} carousel`}>
-        {carouselItems.map((t, index) => 
-          <Card2 key={t.copy + index} icon={t.icon} copy={t.copy} />
+        {probs.length>0&& probs.map((t, index) => 
+          <Card2 key={ index} icon={items[index].icon} copy={t.problem}  />
         )}
       </ul>
     </div>
