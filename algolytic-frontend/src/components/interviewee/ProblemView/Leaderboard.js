@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { getSubmissions } from "../../../actions/interviewee/stats";
+import { getLeaderboard } from "../../../actions/interviewee/stats";
 import CircularProgress from '@mui/material/CircularProgress';
 import "../../../assets/css/interviewee/problemview/submission.css";
 import CloseIcon from '@mui/icons-material/Close';
@@ -8,14 +8,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import Editor from "@monaco-editor/react";
 import Button from '@mui/material/Button';
-const Submission = (props) => {
+const LeaderBoard = (props) => {
     const [data, setData] = useState([])
     const [code, setCode] = useState("")
     const [lang, setLang] = useState("cpp")
     const [dialogOpen, setDialogOpen] = useState(false)
-    const fetchSubmissions = async (data) => {
+    const fetchLeaderboard = async (data) => {
 
-        var res = await getSubmissions(data)
+        var res = await getLeaderboard(data)
         var s = [
 
             {
@@ -43,7 +43,7 @@ const Submission = (props) => {
 
     useEffect(() => {
 
-        fetchSubmissions(props.id)
+        fetchLeaderboard(props.id)
 
     }, [])
 
@@ -53,44 +53,55 @@ const Submission = (props) => {
 
             <div className="inner">
 
-
+                
 
                 {
-
-                    data.length === 0 ? <h1>No Submissions</h1> : (
-
-                        <>
-
+                   
+                    data.length === 0 ? <h1>No Leaderboard</h1> : (                       
+                        // <h3></h3>
                         
-                                <div style={{ display: "flex" }}>                                
-                                <div style={{ cursor: "pointer" }} className="verdict" >Verdict</div>
-                                <div style={{ cursor: "pointer" }} className="lanheader">Language </div>     
-                                
+                        <>                                                              
+                        
+                       
+                            <div style={{ display: "flex" }}>                                
+                                <div style={{ cursor: "pointer" }} className="userida" >User </div>
+                                <div style={{ cursor: "pointer" }} className="langa">Language </div>     
+                                <div style={{ cursor: "pointer" }} className="cpua" >CPU </div>
+                                <div style={{ cursor: "pointer" }} className="memorya" >Memory </div>                             
                                 </div>
+                                {/* hello */}
 
+                   
+                      
                         {data && data.map((d, idx) => {
 
-                            return (
+                            return (                               
 
-
-                                <>
-                                    {(d.verdict == "false" ? <><div style={{ display: "flex" }}><div className="err">Wrong Ans</div><div className="lanwa" style={{ cursor: "pointer" }} onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.language}</div></div></> : <>
+                                <>                                                              
+                                    {
+                                    (
+                                        // d.verdict == "false" ? <><div style={{ display: "flex" }}><div className="err">Wrong Ans</div><div className="lang" style={{ cursor: "pointer" }} onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.language}</div></div></> :
+                                     <>
                                         <div style={{ display: "flex" }}>
-                                            <div className="accepted">Accepted</div>
-                                            <div style={{ cursor: "pointer" }} className="lanac" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.language}</div></div></>)}
-
+                                            {/* <div className="accepted">Accepted</div> */}
+                                            <div style={{ cursor: "pointer" }} className="userid" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.auth["name"]} </div>
+                                            <div style={{ cursor: "pointer" }} className="lang" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.language} </div>     
+                                            <div style={{ cursor: "pointer" }} className="time" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.time}ms </div>
+                                            <div style={{ cursor: "pointer" }} className="memory" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.memory}KB </div>                             
+                                            </div></>)}
 
                                 </>
 
                             )
 
 
-                        }
+                        } ) }
                         
-                        )}
+                        )
 
                         </>
                     )
+                   
                 }
 
 
@@ -98,7 +109,7 @@ const Submission = (props) => {
             <Dialog open={dialogOpen} aria-labelledby="form-dialog-title">
 
                 <DialogTitle id="form-dialog-title">
-                    Submission
+                    Code
                 </DialogTitle>
 
                 <DialogContent>
@@ -137,4 +148,4 @@ const Submission = (props) => {
     );
 };
 
-export default Submission
+export default LeaderBoard
