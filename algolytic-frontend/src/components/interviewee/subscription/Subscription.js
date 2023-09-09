@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from "react";
-import { getSubList, subscribe } from "../../../actions/interviewee/subscription";
+import { getSubList, subscribe, uploadCSV } from "../../../actions/interviewee/subscription";
 import './subscription.css';
 import { checkAuth, checkStatus } from "../../../actions/interviewee/auth";
 import { CircularProgress, LinearProgress } from "@mui/material";
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import DialogActions from '@mui/material/DialogActions';
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 import { showToast } from "../../../App";
+import CloudUploadIcon from '@mui/icons-material/CloudUpload'; // Import the CloudUploadIcon
+
+
 const Subscription = (props) => {
 
 
@@ -13,8 +24,63 @@ const Subscription = (props) => {
   const [status, setStatus] = useState({})
 
   const [loading, setLoading] = useState(true)
+  const [loader, setLoader] = useState(false)
+  const [open, setOpen] = useState(false);
+  const [selectedFile, setSelectedFile] = useState(null);
+   const [isDragActive, setIsDragActive] = useState(false);
 
+  const handleDragOver = (e) => {
+    e.preventDefault();
+  };
+
+  const handleDragEnter = () => {
+    setIsDragActive(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragActive(false);
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+         console.log(e.dataTransfer.files)
+    setIsDragActive(false);
+
+    setSelectedFile(e.dataTransfer.files[0]);
+  };
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+  const handleUpload = async() => {
+    // Handle file upload logic here
+    if (selectedFile) {
+      console.log(selectedFile)
+      setLoader(true)
+   var res=await uploadCSV(selectedFile)
+   if(res!=undefined && res.success){
+
+showToast("CSV successfully updated")
+setLoader(false)
+   }else{
+
+    showToast("Error occured")
+    setLoader(false)
+   }
+    }
+   
+  };
   const fetchSubs = async () => {
+
     var res = await getSubList(data)
     console.log(res.data)
     setData(res.data)
@@ -47,9 +113,17 @@ const Subscription = (props) => {
     else{
       setPending(true)
       var res = await subscribe(id)
-      //setPending(false)
-      window.location = res.data
-      console.log(res)
+      if(res.success){
+        
+
+        window.location = res.data
+      }
+      else{
+        showToast("Subscription Failed")
+      }
+    
+     
+  
     }
   }
 
@@ -63,6 +137,7 @@ const Subscription = (props) => {
           </div>
         ) : (
           <div >
+          
             {pending && <LinearProgress/>}
             <div>
               <div class="container-fluid">
@@ -109,10 +184,24 @@ const Subscription = (props) => {
                                   }
 
                                 </ul>
+                                {
+  status.id===sub.id && sub.id==3 &&(  <Button  startIcon={<FileUploadIcon/>} variant="contained" onClick={handleOpen}>
+  Upload CSV
+</Button>)
+}
                               </div>
-                              {status.id !== sub.id && !pending && <a style={{ cursor: "pointer" }} onClick={() => {
+                              
+
+                              {status.id !== sub.id && !pending &&<a style={{ cursor: "pointer" }} onClick={() => {
                                 if (!pending) getPlan(sub.id)
                               }}>{pending ? <CircularProgress/> : 'Get Plan'}</a>}
+
+               <>
+                    
+                     
+                     </>
+
+
                             </div>
                           </div>
                         ))
@@ -126,6 +215,65 @@ const Subscription = (props) => {
                 </div>
               </div>
             </div>
+
+
+            <Dialog open={open} onClose={handleClose}>
+            {
+                         loader ? (
+                                <LinearProgress/>
+                            ) : (
+                                <div/>
+                            )
+                        }
+        <DialogTitle>
+          Select a File
+          <IconButton
+            edge="end"
+            color="inherit"
+            onClick={handleClose}
+            aria-label="close"
+            sx={{
+              position: 'absolute',
+              right: 8,
+              top: 8,
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+        <DialogContent>
+
+          <div className={isDragActive ? 'drag-active' : ''}>
+      
+          <label for="images" class="drop-container" id="dropcontainer"
+          
+     
+          onDragOver={handleDragOver}
+          onDragEnter={handleDragEnter}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
+   
+          >
+         
+  <span class="drop-title">Drop files here</span>
+  or
+  <input type="file" onChange={handleFileChange}   className="input" />
+</label>
+</div>
+
+         
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleUpload} color="primary">
+            Upload
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+
           </div>
         )
       }

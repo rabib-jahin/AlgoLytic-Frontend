@@ -13,6 +13,12 @@ import ProblemCreate from "./components/interviewee/problempool/ProblemCreate"
 import Subscription from "./components/interviewee/subscription/Subscription";
 import Runner from "./components/interviewee/Runner"
 import PostPayment from "./components/interviewee/PostPayment";
+import Architecture from "./components/Architecture";
+import Mocktest from "./components/interviewee/Mocktest/Mocktest";
+import SingleTest from "./components/interviewee/Mocktest/SingleTest";
+import Home from "./components/interviewee/Home";
+import Dummy from "./components/interviewee/Mocktest/Dummy";
+import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
 
 var showToast, getApiUrl;
 
@@ -48,7 +54,8 @@ function App() {
       <BrowserRouter>
         <NavBar />
         <Routes>
-          <Route path="/" exact element={<MainProblemPoolContainer />} />
+          <Route path="/" exact element={<Home />} />
+          <Route path="/problempool" exact element={<MainProblemPoolContainer />} />
           <Route
             path="/user-progress"
             exact
@@ -93,6 +100,24 @@ function App() {
             path="/create"
             exact
             element={<ProblemCreate />}
+
+          />
+
+        <Route
+            path="/monitor"
+            exact
+            element={<Architecture />}
+           <Route
+            path="/tests"
+            exact
+            element={<Mocktest />}            
+
+          />          
+
+          <Route
+            path="/test/:id"
+            exact
+            element={<SingleTest />}
 
           />
         </Routes>

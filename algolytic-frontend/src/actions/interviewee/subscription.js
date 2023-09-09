@@ -3,6 +3,7 @@ import axios from 'axios'
 import { getApiUrl } from '../../App';
 
 const cookies = new Cookies();
+const formData = new FormData();
 
 export const getSubList=async ()=>{
     let base_url=getApiUrl(); 
@@ -23,6 +24,18 @@ export const subscribe=async (id)=>{
       sub_id:id
     },{headers:{authorization:'Bearer '+cookies.get('token')}}).catch(e=>console.log(e))
     return res.data
+  }
+  return {success:false}
+
+}
+
+export const uploadCSV=async (data)=>{
+  formData.append('csvFile', data);
+  let base_url=getApiUrl(); 
+  if(!(cookies.get('token')==undefined || cookies.get('token')==null)){
+    var res=await axios.post(base_url+'/subscription/upload',formData,{headers:{authorization:'Bearer '+cookies.get('token')}}).catch(e=>console.log(e))
+    console.log(res)
+    return res?.data
   }
   return {success:false}
 
