@@ -54,6 +54,8 @@ console.log(serial)
     });
   };
 
+  //dummy comment for deployment
+
   return (
     <>
    
@@ -64,7 +66,7 @@ console.log(serial)
           <Route
             path="/user-progress"
             exact
-            element={<UserProgressContainer />}
+            element={<UserProgressContainer/>}
           />
               <Route
             path="/problem/:id"
