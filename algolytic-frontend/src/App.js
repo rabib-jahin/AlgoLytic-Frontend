@@ -1,5 +1,5 @@
 import NavBar from "./components/interviewee/navbar/Navbar";
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { ToastContainer, toast as oldToast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainProblemPoolContainer from "./components/interviewee/problempool/MainProblemPoolContainer";
@@ -18,6 +18,7 @@ import SingleTest from "./components/interviewee/Mocktest/SingleTest";
 import Home from "./components/interviewee/Home";
 import Dummy from "./components/interviewee/Mocktest/Dummy";
 import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
+import { useNavigate} from "react-router-dom";
 
 var showToast, getApiUrl;
 
@@ -25,9 +26,15 @@ var showToast, getApiUrl;
 function App() {
 
   
+  const navigate=useNavigate()
 
+  const [serial,setSerial]=useState(1)
 
-  
+ useEffect(()=>{
+
+console.log(serial)
+
+ },[serial])
 
 
   getApiUrl = () => {
@@ -50,7 +57,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+   
         <NavBar />
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -63,7 +70,13 @@ function App() {
               <Route
             path="/problem/:id"
             exact
-            element={<ProblemView  />}
+            element={<ProblemView navigate={navigate}  setSerial={setSerial} serial={serial} isTest={false}/>}
+          />
+
+<Route
+            path="/test/problem/:id"
+            exact
+            element={<ProblemView navigate={navigate}  setSerial={setSerial} serial={serial} isTest={true}/>}
           />
 
 
@@ -115,7 +128,7 @@ function App() {
 
           />
         </Routes>
-      </BrowserRouter>
+     
       <ToastContainer />
     </>
   );

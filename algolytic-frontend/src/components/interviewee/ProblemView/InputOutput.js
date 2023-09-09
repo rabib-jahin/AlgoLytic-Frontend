@@ -18,6 +18,11 @@ useEffect(()=>{
 fetchProblem(props.id)
    
   },[])
+  useEffect(()=>{
+
+fetchProblem(props.id)
+   
+  },[props.id])
 
   const [verdict,setVerdict]=useState(props.verdict)
 

@@ -45,6 +45,11 @@ const Description = (props) => {
     fetchProblems(props.id)
 
   }, [])
+  useEffect(() => {
+
+    fetchProblems(props.id)
+
+  }, [props.serial])
   
   return (
     <div className="description" style={{ color: "white", marginLeft: "20px" }}>
