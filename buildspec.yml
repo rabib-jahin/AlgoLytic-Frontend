@@ -7,12 +7,12 @@ env:
 phases:
   pre_build:
     commands:
-      - cd algolytic-frontend
-      - npm install --force
+      - ls
+      - cd algolytic-frontend && npm install --force
+
   build:
     commands:
-      - cd algolytic-frontend
-      - npm run build
+      - cd algolytic-frontend && npm run build
 
 artifacts:
   files:
