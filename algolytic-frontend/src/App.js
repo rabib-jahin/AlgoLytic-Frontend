@@ -1,5 +1,5 @@
 import NavBar from "./components/interviewee/navbar/Navbar";
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import { ToastContainer, toast as oldToast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainProblemPoolContainer from "./components/interviewee/problempool/MainProblemPoolContainer";
@@ -16,9 +16,10 @@ import PostPayment from "./components/interviewee/PostPayment";
 import Architecture from "./components/Architecture";
 import Mocktest from "./components/interviewee/Mocktest/Mocktest";
 import SingleTest from "./components/interviewee/Mocktest/SingleTest";
-import Home from "./components/interviewee/Home";
+import Home from "./components/interviewee/home";
 import Dummy from "./components/interviewee/Mocktest/Dummy";
 import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
+import { useNavigate} from "react-router-dom";
 
 var showToast, getApiUrl;
 
@@ -26,9 +27,15 @@ var showToast, getApiUrl;
 function App() {
 
   
+  const navigate=useNavigate()
 
+  const [serial,setSerial]=useState(1)
 
-  
+ useEffect(()=>{
+
+console.log(serial)
+
+ },[serial])
 
 
   getApiUrl = () => {
@@ -51,7 +58,7 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
+   
         <NavBar />
         <Routes>
           <Route path="/" exact element={<Home />} />
@@ -64,7 +71,13 @@ function App() {
               <Route
             path="/problem/:id"
             exact
-            element={<ProblemView  />}
+            element={<ProblemView navigate={navigate}  setSerial={setSerial} serial={serial} isTest={false}/>}
+          />
+
+<Route
+            path="/test/problem/:id"
+            exact
+            element={<ProblemView navigate={navigate}  setSerial={setSerial} serial={serial} isTest={true}/>}
           />
 
 
@@ -107,7 +120,10 @@ function App() {
             path="/monitor"
             exact
             element={<Architecture />}
-           <Route
+
+            />
+        
+        <Route
             path="/tests"
             exact
             element={<Mocktest />}            
@@ -121,7 +137,7 @@ function App() {
 
           />
         </Routes>
-      </BrowserRouter>
+     
       <ToastContainer />
     </>
   );

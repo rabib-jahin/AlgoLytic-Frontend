@@ -58,12 +58,7 @@ const ProgressGraphs = (props) => {
                     <h5>Hard      5/100</h5>
                 </div>
             </div>
-            <div className="accept-rate">
-                <h4>Acceptance Rate</h4>
-                <div className="doughnut">
-                    <Doughnut data={data2} width={450} height={450} />
-                </div>
-            </div>
+          
         </div>
     );
 };
