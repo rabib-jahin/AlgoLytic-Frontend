@@ -7,7 +7,7 @@ import "../../../assets/css/interviewee/userprogress/usercontainer.css";
 
 const UserProgressContainer = (props) => {
     return (
-        <div className="container">
+        <div className="container-user">
             <ProgressGraphs />
             <UserAreas />
             <ContributionGraph />

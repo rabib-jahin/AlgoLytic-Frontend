@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { styled } from '@mui/material/styles';
+import CircularProgress from "@mui/material/CircularProgress";
 import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import Table from '@mui/material/Table';
@@ -23,7 +24,8 @@ import LastPageIcon from '@mui/icons-material/LastPage';
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 import { getSubmissionStats } from "../../../actions/interviewee/stats";
 import { getRec} from "../../../actions/interviewee/recommenedpblmList";
-import { getTestProblems} from "../../../actions/interviewee/mocktest";
+import { getTestProblems, submitTest} from "../../../actions/interviewee/mocktest";
+import { useParams } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -54,13 +56,16 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 const SingleTest= (props) => {
 
   // timer codes
+  const {id}=useParams()
 
   const Ref = useRef(null);
  
   // The state for our timer
   const [timer, setTimer] = useState('00:00:00');
   const [submitted, setSubmitted] = useState(0);
-  const [marks, setMarks] = useState(20);
+  const [loader, setLoader] = useState(false);
+  const [loader2, setLoader2] = useState(false);
+  const [data, setData] = useState({});
 
   const getTimeRemaining = (e) => {
       const total = Date.parse(e) - Date.parse(new Date());
@@ -85,15 +90,39 @@ const SingleTest= (props) => {
               (minutes > 9 ? minutes : '0' + minutes) + ':'
               + (seconds > 9 ? seconds : '0' + seconds)
           )
+
+          localStorage.setItem("time", (hours > 9 ? hours : '0' + hours) + ':' +
+          (minutes > 9 ? minutes : '0' + minutes) + ':'
+          + (seconds > 9 ? seconds : '0' + seconds))
+      }else{
+        const functionCalledFlag = localStorage.getItem('functionCalledFlag');
+        if(functionCalledFlag==='false'){
+          onClickSubmit()
+          localStorage.setItem('functionCalledFlag','true')
+        }
       }
   }
 
+const formatTime=(seconds)=> {
+  const hours = Math.floor(seconds / 3600);
+  const minutes = Math.floor((seconds % 3600) / 60);
+  const remainingSeconds = seconds % 60;
+
+  const formattedTime = `${String(hours).padStart(2, '0')}:${String(
+    minutes
+  ).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+
+  return formattedTime;
+}
   const clearTimer = (e) => {
 
       // If you adjust it you should also need to
       // adjust the Endtime formula we are about
       // to code next   
-      setTimer('00:02:10');
+   if(localStorage.getItem("time")!='null'){
+    setTimer(localStorage.getItem("time"))
+   }
+    else  setTimer('00:02:10');
 
       // If you try to remove this line the
       // updating of timer Variable will be
@@ -101,16 +130,27 @@ const SingleTest= (props) => {
       if (Ref.current) clearInterval(Ref.current);
       const id = setInterval(() => {
           startTimer(e);
+          
       }, 1000)
       Ref.current = id;
   }
-
+  const timeStringToSeconds=(timeString)=> {
+    const [hours, minutes, seconds] = timeString.split(':').map(Number);
+    const totalSeconds = hours * 3600 + minutes * 60 + seconds;
+    return totalSeconds;
+  }
+  
   const getDeadTime = () => {
       let deadline = new Date();
 
       // This is where you need to adjust if
       // you entend to add more time
+      if(localStorage.getItem("time")!='null'){
+
+        deadline.setSeconds(deadline.getSeconds() +timeStringToSeconds(localStorage.getItem("time")) );
+      }else
       deadline.setSeconds(deadline.getSeconds() + 130);
+      
       return deadline;
   }
 
@@ -120,16 +160,25 @@ const SingleTest= (props) => {
   // We put empty array to act as componentDid
   // mount only
   useEffect(() => {
-      clearTimer(getDeadTime());
+     clearTimer(getDeadTime());
   }, []);
 
   // Another way to call the clearTimer() to start
   // the countdown is via action event from the
   // button first we create function to be called
   // by the button
-  const onClickSubmit = () => {
+  const onClickSubmit = async() => {
       // clearTimer(getDeadTime());
+      setLoader(true)
       setSubmitted(1);
+      var obj={id:id}
+      var res=await submitTest(obj)
+      setData(res.data)
+      setLoader(false)
+      window.location.reload();
+
+      //  window.sessionStorage.setItem("tests",JSON.stringify([]))
+      //    window.sessionStorage.setItem("test_id",null)
   }
 
   // problem codes
@@ -140,15 +189,35 @@ const SingleTest= (props) => {
 
   const fetchTestProblems=async (data)=>{
     // setProbs({})
-    var res=await getRec()
-    setProblems(res);
+    setLoader2(true)
+    var res=await getTestProblems(id)
+
+    setProblems(res.data);
+    let serial=1;
+    let d=[]
+    let obj={}
+    console.log(res.data)
+    setLoader2(false)
+    
+    res.data.problems&&res.data.problems.forEach(r=>{
+
+obj=r;
+obj["serial"]=serial;
+serial+=1
+
+d.push(obj)
+})
+console.log(d)
+    window.sessionStorage.setItem("tests",JSON.stringify(d))
+    window.sessionStorage.setItem("test_id",id)
+    console.log(window.sessionStorage.getItem("tests"))
 
   }
 
   const redirectProb = (id) => {
   
       console.log(id)
-      window.location.href = "/problem/" + id
+      window.location.href = "/test/problem/" + id
   
     }
 
@@ -159,28 +228,61 @@ const SingleTest= (props) => {
   },[])
   return (
     <div>
+      {Object.keys(problems).length != 0 && problems.marks==null && submitted==0?
+      (<>
+      {
+        loader?(<Button variant="contained" color="success" style={{margin:"20px",marginLeft:"46%"}} onClick={onClickSubmit} >
+        <CircularProgress  />
+      </Button>):(<Button variant="contained" color="success" style={{margin:"20px",marginLeft:"46%"}} onClick={onClickSubmit} >
+        Submit Test
+      </Button>)
+        }</>):<></>
+       
+        }
         <div class="submit">
-        <Button variant="contained" color="success" onClick={onClickSubmit} >
-          Submit Test
-        </Button>
+       
         </div>
       <div class="box">
         <div class="ring">
         <div class="fraction">
+
+          {loader2?<CircularProgress/>
           
-        {submitted === 1 ? (
-        <>
-          <div className="numerator">{marks}</div>
-          <hr className="division-line" />
-          <div className="denominator">40</div>
-        </>
-      ) : (
-        <h2>{timer}</h2>
-      )}
+        
+        :(
+
+          Object.keys(problems).length !=0  && problems.marks!=null || submitted==1 ? (
+            <>
+              <div className="numerator">{Object.keys(problems).length == 0 ?<></>:problems.marks}</div>
+              <hr className="division-line" />
+              <div className="denominator"> {Object.keys(problems).length == 0 ? <></>:problems.problems.length*10}</div>
+            </>
+          ) : (<>
+            <h2>{timer}</h2>
+    
+    
+       </>
+    
+            
+          )
+        )
+        }
+          
+        
         
         </div>
         
         </div>
+        <div class="text-container">
+        <div class="text-green">
+          <pre>Solved : {Object.keys(problems).length == 0 ? <></>:problems.problems.filter(p=>p.state=="solved").length}</pre>
+        </div>
+        <div class="text-yellow">
+          <pre>Unsolved:  {Object.keys(problems).length == 0 ? <></>:problems.problems.filter(p=>p.state=="unsolved").length}</pre>
+        </div>
+    
+      </div>
+ 
       </div>
     
      
@@ -206,8 +308,8 @@ const SingleTest= (props) => {
   
   
                   : (rowsPerPage > 0
-                    ? problems.data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                    : problems
+                    ? problems.problems?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                    : problems.problems
   
   
                   )?.map((row) => (
@@ -218,17 +320,17 @@ const SingleTest= (props) => {
                       
                   
                     </StyledTableCell>
-                    <StyledTableCell  align="left" onClick={()=>redirectProb(row.problem_id)}>{row.title}
+                    <StyledTableCell  align="left" onClick={()=>redirectProb(row.prob.problem_id)}>{row.prob.title}
                       {
-                          row.isPremium?<WorkspacePremiumIcon color="primary"/>:null
+                          row.prob.IconButtonisPremium?<WorkspacePremiumIcon color="primary"/>:null
                       }
                     </StyledTableCell>
                     
                      
                      
-                    <StyledTableCell align="left">{row.acceptance}</StyledTableCell>
-                    <StyledTableCell align="left">{row.difficulty}</StyledTableCell>
-                    <StyledTableCell align="left">{row.tag}</StyledTableCell>
+                    <StyledTableCell align="left">{row.prob.acceptance}</StyledTableCell>
+                    <StyledTableCell align="left">{row.prob.difficulty}</StyledTableCell>
+                    <StyledTableCell align="left">{row.prob.tag}</StyledTableCell>
                   </StyledTableRow>
                   ))}
             </TableBody>
