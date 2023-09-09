@@ -42,14 +42,15 @@ export const getTestProblems=async (test_id)=>{
 export const createTest=async (data)=>{
   // have to change this after doing backend
   let base_url=getApiUrl();
- 
+  var a={}
+  a["tags"]=data
 
-  var res=await axios.post(base_url+"/mocktest/createTest",data,{headers:{authorization:'Bearer '+cookies.get('token')}})
+  var res=await axios.post(base_url+"/mocktest/createTest",a,{headers:{authorization:'Bearer '+cookies.get('token')}})
   .catch(error => {
     console.log(error);
     
   });
- // console.log(res.data)
+  console.log(res.data)
 
   return res?.data
 }
@@ -60,6 +61,20 @@ export const submitTest=async (data)=>{
  
 
   var res=await axios.post(base_url+"/mocktest/submitTest",data,{headers:{authorization:'Bearer '+cookies.get('token')}})
+  .catch(error => {
+    console.log(error);
+    
+  });
+ // console.log(res.data)
+
+  return res?.data
+}
+export const getTests=async ()=>{
+  // have to change this after doing backend
+  let base_url=getApiUrl();
+ 
+
+  var res=await axios.get(base_url+"/mocktest/getCompletedTests",{headers:{authorization:'Bearer '+cookies.get('token')}})
   .catch(error => {
     console.log(error);
     

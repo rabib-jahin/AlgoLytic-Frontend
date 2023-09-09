@@ -4,7 +4,6 @@ import { ToastContainer, toast as oldToast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import MainProblemPoolContainer from "./components/interviewee/problempool/MainProblemPoolContainer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { devApi, prodApi } from "./config";
 import UserProgressContainer from "./components/interviewee/UserProgress/UserProgressContainer";
 import ProblemView from "./components/interviewee/ProblemView/ProblemView";
 
@@ -13,9 +12,10 @@ import ProblemCreate from "./components/interviewee/problempool/ProblemCreate"
 import Subscription from "./components/interviewee/subscription/Subscription";
 import Runner from "./components/interviewee/Runner"
 import PostPayment from "./components/interviewee/PostPayment";
+import Architecture from "./components/Architecture";
 import Mocktest from "./components/interviewee/Mocktest/Mocktest";
 import SingleTest from "./components/interviewee/Mocktest/SingleTest";
-import Home from "./components/interviewee/Home";
+import Home from "./components/interviewee/home";
 import Dummy from "./components/interviewee/Mocktest/Dummy";
 import Dummy2 from "./components/interviewee/Mocktest/Dummy2";
 
@@ -31,9 +31,7 @@ function App() {
 
 
   getApiUrl = () => {
-    var env = process.env.NODE_ENV;
-    if (env === "development") return devApi;
-    return prodApi;
+    return process.env.REACT_APP_BACKEND_API;
   };
 
   showToast = (message) => {
@@ -101,7 +99,15 @@ function App() {
             element={<ProblemCreate />}
 
           />
-           <Route
+
+        <Route
+            path="/monitor"
+            exact
+            element={<Architecture />}
+
+            />
+        
+        <Route
             path="/tests"
             exact
             element={<Mocktest />}            
