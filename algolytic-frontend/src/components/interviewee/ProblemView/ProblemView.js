@@ -15,7 +15,7 @@ import InputOutput from "./InputOutput";
 import SubmitCode from "./SubmitCode";
 import Submission from "./Submission";
 import LeaderBoard from "./Leaderboard";
-
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import ShareProblem from "./ShareProblem";
 
 
@@ -158,18 +158,19 @@ fetchUsers()
                                         )
                                     }
                                 })
-                            }{
-                              props.serial=== JSON.parse(window.sessionStorage.getItem("tests")).length+1?(
-                                <div className={`step-current`}>
-                              Home
-                            </div>
-
-                              ): <div className={`step-pending `} onClick={()=>{props.setSerial(JSON.parse(window.sessionStorage.getItem("tests")).length+1);props.navigate("/test/"+   window.sessionStorage.getItem("test_id"));props.navigate(0)}}>
-                              Home
-                          </div>
                             }
+                         
+                           
+
+                         
+                            
                             
                         </div>
+                        <div  onClick={()=>{props.navigate("/test/"+   window.sessionStorage.getItem("test_id"));props.navigate(0)}}>
+                                <ArrowBackIosIcon style={{    float:" right",
+    color: "wheat",
+    cursor:" pointer"}}/>
+                          </div>
                
                         </div>):<></>}
         <div className="tabs">

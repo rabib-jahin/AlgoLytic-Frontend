@@ -503,7 +503,7 @@ var initEdges = [
 
 const Architecture = props => {
 
-    //state==success,error,loading
+    //state==success,error,loading;
 
 
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
@@ -562,13 +562,17 @@ const Architecture = props => {
 
     const initializeLongPolling=async ()=>{
         var api=getApiUrl()
-        var res=await axios.get(`${api}/webhook/connect`,{ timeout: 60000*60 })
-        var currentState=res.data
-        setAllEdges(currentState)
-        initializeLongPolling()
+        try{
+            var res=await axios.get(`${api}/webhook/connect`,{ timeout: 10000 })
+            var currentState=res.data
+            setAllEdges(currentState)
+            initializeLongPolling()
+        }catch(err){
+            initializeLongPolling()
+        }
     }
 
-    //sdsdsd
+    //sdsdsdsdsd
 
     const initialize=async ()=>{
         var api=getApiUrl()

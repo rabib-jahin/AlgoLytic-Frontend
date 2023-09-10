@@ -84,7 +84,7 @@ const LeaderBoard = (props) => {
                                      <>
                                         <div style={{ display: "flex" }}>
                                             {/* <div className="accepted">Accepted</div> */}
-                                            <div style={{ cursor: "pointer" }} className="userid" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.auth["name"]} </div>
+                                            <div style={{ cursor: "pointer",width:"66px" }} className="userid" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.auth["name"]} </div>
                                             <div style={{ cursor: "pointer" }} className="lang" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.language} </div>     
                                             <div style={{ cursor: "pointer" }} className="time" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.time}ms </div>
                                             <div style={{ cursor: "pointer" }} className="memory" onClick={() => { setDialogOpen(true); setCode(d.solution); setLang(d.language) }} >{d.memory}KB </div>                             

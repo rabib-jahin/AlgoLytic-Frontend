@@ -14,9 +14,7 @@ const Filtering = (props) => {
   const [activeIndex, setActiveIndex] = useState(-1);
   const [text, setText] = useState("");
   const [tags, setTags] = useState([])
-  const [data, setData] = useState({})
-  const acRef=useRef();
-  const actypeRef=useRef();
+  const [data, setData] = useState({})  
 
   // array of objects for each button with its name and dropdown items
   const buttons = [
@@ -65,49 +63,38 @@ const Filtering = (props) => {
     if (to == "difficulty") {
       d = { ...props.body, difficulty: item.toLowerCase() }
       props.setBody(d);
-
-
     }
+
     if (to === "status") {
-      d = { ...props.body, status: item }
-      props.setBody(d);
+      // d = { ...props.body, status: item }    
 
-
-    }
-    if (to === "premium") {
-
-      if (item == "Regular") {
-        d = { ...props.body, isPremium: 0 }
-        props.setBody(d);
-
-
-      }
-      else {
+    if (item === "Premium") {
+      console.log("here")
         d = { ...props.body, isPremium: 1 }
         props.setBody(d);
-
+    }
+      else {
+        console.log("here")
+        d = { ...props.body, isPremium: 0 }
+        props.setBody(d);
       }
     }
+  
     if (to == "tag") {
       d = { ...props.body, tag: item.toLowerCase() }
       props.setBody(d);
 
     }
-
-    d = { ...props.body, ac: acRef.current.value }
-    props.setBody(d);
-    d = { ...props.body, actype: actypeRef.current.value }
-    props.setBody(d);
+    
 
     console.log(d)
-
+toggleDropdown(idx)
 
   }
   const filterfun = () => {
 
    
-    console.log(acRef.current.value)
-    console.log(actypeRef.current.value)
+   
     props.fetchProblems()
     props.setBody({})
   }

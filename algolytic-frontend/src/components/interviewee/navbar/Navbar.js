@@ -41,8 +41,10 @@ const NavBar = (props) => {
   const rePassRef=useRef()
 
   const handleOptionClick = (option) => {
+    if(option==="home"){window.sessionStorage.removeItem("option")}
+    else{
     setActiveOption(option);
-    window.sessionStorage.setItem("option", option);
+    window.sessionStorage.setItem("option", option);}
   };
 
   const [isAuth, setAuth] = useState(checkAuth());
@@ -148,7 +150,7 @@ else if (password !== repass)
   return (
     <header className="header">
       <div className="">
-        <Link to="/">
+        <Link to="/"   onClick={() => handleOptionClick("home")}>
           <img className="logo-image" src={logo} alt="LOGO" />
         </Link>
       </div>
