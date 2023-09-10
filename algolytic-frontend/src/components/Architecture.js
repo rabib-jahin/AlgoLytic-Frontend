@@ -520,7 +520,7 @@ const Architecture = props => {
             initialEdges.map((e,i)=>{
                 if(e.id===edgeProps.edgeId){
                     var currEdge=e
-                    currEdge['label']=`[${edgeProps.label}${new Date().toLocaleString()}]`
+                    currEdge['label']=`[${edgeProps.label}${new Date(edgeProps.timestamp).toLocaleString()}]`
                     if(edgeProps.state==='loading'){
                         currEdge['animated']= true
                         currEdge['style']={
@@ -574,6 +574,7 @@ const Architecture = props => {
         var api=getApiUrl()
         var res=await axios.get(`${api}/webhook/initialize`,{ timeout: 60000*60 })
         var currentState=res.data
+        console.log(currentState)
         setAllEdges(currentState)
         initializeLongPolling()
     }
