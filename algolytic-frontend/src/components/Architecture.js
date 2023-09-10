@@ -568,6 +568,8 @@ const Architecture = props => {
         initializeLongPolling()
     }
 
+    //sdsdsd
+
     const initialize=async ()=>{
         var api=getApiUrl()
         var res=await axios.get(`${api}/webhook/initialize`,{ timeout: 60000*60 })
