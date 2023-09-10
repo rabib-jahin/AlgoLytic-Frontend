@@ -39,7 +39,7 @@ const Home = (props) => {
             icon:"face",
             copy:'01. Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
         },{
-            icon:"pets",
+            icon:"brightness_7",
             copy:'02. Sed do eiusmod tempor incididunt ut labore.'
         },{
             icon:"stars",
@@ -75,14 +75,14 @@ const Home = (props) => {
   const [carouselItems, setCarouselItems] = useState(items);
   const [probs, setProbs] = useState([]);
   useEffect(() => {
-    document.documentElement.style.setProperty('--num', carouselItems.length);
-  }, [carouselItems])
+    document.documentElement.style.setProperty('--num', probs.length);
+  }, [probs])
   
   const handleAnimationEnd = () => {
     if(moveClass === 'prev'){
-      shiftNext([...carouselItems]);
+      shiftNext([...probs]);
     }else if(moveClass === 'next'){
-      shiftPrev([...carouselItems]);
+      shiftPrev([...probs]);
     }
     setMoveClass('')
   }
@@ -90,13 +90,13 @@ const Home = (props) => {
   const shiftPrev = (copy) => {
     let lastcard = copy.pop();
     copy.splice(0, 0, lastcard);
-    setCarouselItems(copy);
+    setProbs(copy);
   }
   
   const shiftNext = (copy) => {
     let firstcard = copy.shift();
     copy.splice(copy.length, 0, firstcard);
-    setCarouselItems(copy);
+    setProbs(copy);
   }
 
   const fetch=async()=>{
@@ -111,7 +111,7 @@ setProbs(res.data)
     },[])
 return (
         <div >
-              <div class="box-home2 offset-top-left-shadow" style={{fontSize:"18px"}}>Popular Problems</div>
+              <div class="box-home2" style={{fontSize:"18px"}}>Popular Problems</div>
     {/* <div class="box offset-top-left-shadow"><div>Popular Problems</div></div> */}
     <div className="carouselwrapper module-wrapper">
       <div className="ui">
@@ -134,10 +134,18 @@ return (
   </div>
 </div>
     <div class="container-home">
-  <div class="box-home"> Live Coding</div>
-  <div class="box-home">Solutions in Different Languages</div>
-  <div class="box-home">Practice Test</div>
-  <div class="box-home">Real Time Recommendation</div>
+  <div class="box-home" style={{background:"#da5b5b",    width: "327px",
+    height: "186px",
+    fontSize: "24px"}}> Live Coding</div>
+  <div class="box-home" style={{background:"green",width: "327px",
+    height: "186px",
+    fontSize: "24px"}}>Solutions in Different Languages</div>
+  <div class="box-home" style={{background:"#8a4e58",width: "327px",
+    height: "186px",
+    fontSize: "24px"}}>Practice Test</div>
+  <div class="box-home" style={{background:"blue",width: "327px",
+    height: "186px",
+    fontSize: "28px"}}>Real Time Recommendation</div>
 </div>
 </div>
             
