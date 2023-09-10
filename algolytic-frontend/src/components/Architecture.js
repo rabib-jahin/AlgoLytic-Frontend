@@ -589,7 +589,7 @@ const Architecture = props => {
             setTimeout(
                 function() {
                   initialize()
-            }, 2000);
+            }, 2000);//ss
         }
         
     }
