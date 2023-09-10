@@ -563,24 +563,35 @@ const Architecture = props => {
     const initializeLongPolling=async ()=>{
         var api=getApiUrl()
         try{
-            var res=await axios.get(`${api}/webhook/connect`,{ timeout: 10000 })
+            var res=await axios.get(`${api}/webhook/connect`,{ timeout: 60*10000 })
             var currentState=res.data
             setAllEdges(currentState)
             initializeLongPolling()
         }catch(err){
-            initializeLongPolling()
+            setTimeout(
+                function() {
+                  initialize()
+            }, 2000);
         }
     }
 
     //sdsdsdsdsd
 
     const initialize=async ()=>{
-        var api=getApiUrl()
-        var res=await axios.get(`${api}/webhook/initialize`,{ timeout: 60000*60 })
-        var currentState=res.data
-        console.log(currentState)
-        setAllEdges(currentState)
-        initializeLongPolling()
+        try{
+            var api=getApiUrl()
+            var res=await axios.get(`${api}/webhook/initialize`,{ timeout: 60000*60 })
+            var currentState=res.data
+            console.log(currentState)
+            setAllEdges(currentState)
+            initializeLongPolling()
+        }catch(err){
+            setTimeout(
+                function() {
+                  initialize()
+            }, 2000);
+        }
+        
     }
 
     useEffect(()=>{
