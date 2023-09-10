@@ -572,7 +572,7 @@ const Architecture = props => {
         }
     }
 
-    //sdsdsd
+    //sdsdsdsdsd
 
     const initialize=async ()=>{
         var api=getApiUrl()
