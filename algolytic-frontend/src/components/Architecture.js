@@ -503,7 +503,7 @@ var initEdges = [
 
 const Architecture = props => {
 
-    //state==success,error,loading
+    //state==success,error,loading;
 
 
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
