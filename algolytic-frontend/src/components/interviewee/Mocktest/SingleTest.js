@@ -122,7 +122,7 @@ const formatTime=(seconds)=> {
    if(localStorage.getItem("time")!='null'){
     setTimer(localStorage.getItem("time"))
    }
-    else  setTimer('00:02:10');
+    else  setTimer('20:00:00');
 
       // If you try to remove this line the
       // updating of timer Variable will be
@@ -149,7 +149,7 @@ const formatTime=(seconds)=> {
 
         deadline.setSeconds(deadline.getSeconds() +timeStringToSeconds(localStorage.getItem("time")) );
       }else
-      deadline.setSeconds(deadline.getSeconds() + 130);
+      deadline.setSeconds(deadline.getSeconds() + 1200);
       
       return deadline;
   }
