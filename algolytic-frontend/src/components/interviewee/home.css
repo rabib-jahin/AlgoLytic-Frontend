@@ -115,18 +115,22 @@
     box-shadow: 0px 1px 2px 0px var(--card-shadow);
     border-radius: 4px;
     margin: var(--card-margin);
-   background-color:#1c1d20;
+  background-color:#1c5b2a;
       background: linear-gradient(-45deg, #1c1d20, #929292,);
       cursor:pointer;
-
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-radius: 10px;
   }
   .card-home:hover {
     box-shadow: 0px 1px 2px 0px var(--card-shadow);
     border-radius: 4px;
     margin: var(--card-margin);
-   background-color:#1c1d20;
+   background-color:#20b741;
       background: linear-gradient(-45deg, #1c1d20, #929292,);
       cursor:pointer;
+      transform: scale(1.05);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   .card-home .material-icons {
     font-size: 4.8rem;
@@ -208,10 +212,13 @@
   }
   
   .circle {
+   
     width: 150px; /* Adjust the circle diameter as needed */
     height: 150px; /* Should be equal to the width for a perfect circle */
-    background-color: #454141;
+    background-color: #ad5681;
     color:white;
+    margin-top: 20px;
+    margin-bottom: 20px;
     border-radius: 50%; /* Circular shape */
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Box shadow */
     display: flex;
@@ -222,5 +229,6 @@
   .circle p {
     margin: 0;
     font-size: 1.2rem; /* Adjust the font size as needed */
+
   }
   
