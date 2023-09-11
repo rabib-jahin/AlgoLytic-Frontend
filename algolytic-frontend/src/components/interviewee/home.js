@@ -111,7 +111,7 @@ setProbs(res.data)
     },[])
 return (
         <div >
-              <div class="box-home2 offset-top-left-shadow" style={{fontSize:"18px"}}>Popular Problems</div>
+              <div class="box-home2 offset-top-left-shadow" style={{fontSize:"18px"}}>Popular Problems New</div>
     {/* <div class="box offset-top-left-shadow"><div>Popular Problems</div></div> */}
     <div className="carouselwrapper module-wrapper">
       <div className="ui">
